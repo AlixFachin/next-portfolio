@@ -5,6 +5,7 @@ import { getAllTagsList, getSortedPostsData } from "@/lib/posts";
 import Link from "next/link";
 import { NextPage, GetStaticProps } from "next";
 import dayjs from "dayjs";
+import FadeIn from "@/components/fadein";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,10 +27,11 @@ const Home: NextPage<HomeParams> = ({ allPostsData, tagMap }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="h-1/2 py-8 ">
-        <h1 className="font-title text-black text-6xl pl-8">
-          Welcome to Coding Patisserie!
-        </h1>
-        <p className="italic pl-8 m-8">Coding insights fresh from the oven</p>
+        <FadeIn direction="from-left">
+          <h1 className="font-title text-black text-6xl pl-8">
+            Welcome to alix-fachin.dev
+          </h1>
+        </FadeIn>
 
         <div className="fixed top-0 left-0 -z-10 w-full">
           <svg
@@ -83,27 +85,32 @@ const Home: NextPage<HomeParams> = ({ allPostsData, tagMap }) => {
           community, and maybe as well helping me remember some of the content!
         </div>
         <section className="blogRoll">
-          {allPostsData.map(({ id, date, title, tags }) => (
-            <div className="mb-3 p-3 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg flex flex-col justify-start">
-              <h3 className="text-orange-300/80  hover:text-orange-300 text-2xl mb-3 w-full align-middle">
-                <Link href={`/posts/${id}`}>{title}</Link>
-              </h3>
-              <div className="flex flex-row items-center">
-                <div className="">{dayjs(date).format("DD-MMM-YY")}</div>
-                <div className="flex-grow">
-                  {
-                    // spacer
-                  }
-                </div>
-                <div className="self-end p-2 flex justify-around text-sm">
-                  {tags.map((tag: string) => (
-                    <div className="tag" key={tag}>
-                      {tag}
-                    </div>
-                  ))}
+          {allPostsData.map(({ id, date, title, tags }, loop_index) => (
+            <FadeIn
+              key={`blogCard-${id}`}
+              direction={loop_index % 2 === 0 ? "from-left" : "from-right"}
+            >
+              <div className="mb-3 p-3 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg flex flex-col justify-start">
+                <h3 className="text-orange-300/80  hover:text-orange-300 text-2xl mb-3 w-full align-middle">
+                  <Link href={`/posts/${id}`}>{title}</Link>
+                </h3>
+                <div className="flex flex-row items-center">
+                  <div className="">{dayjs(date).format("DD-MMM-YY")}</div>
+                  <div className="flex-grow">
+                    {
+                      // spacer
+                    }
+                  </div>
+                  <div className="self-end p-2 flex justify-around text-sm">
+                    {tags.map((tag: string) => (
+                      <div className="tag" key={tag}>
+                        {tag}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            </FadeIn>
           ))}
         </section>
       </main>

@@ -38,3 +38,31 @@ code {
 .highlight pre {
     @apply py-4 px-2 rounded-lg
 }
+
+/* Fade in animation classes  */
+.fade-in-section {
+    opacity: 0;    
+    visibility: hidden;
+    transition: opacity 1.2s ease-in, transform 1.2s ease-out;
+    will-change: opacity, visibility;
+}
+
+.fade-in-section.from-left {
+    transform: translateX(-10vw); 
+}
+.fade-in-section.from-right {
+    transform: translateX(10vw); 
+}
+.fade-in-section.from-above {
+    transform: translateY(-10vh); 
+}
+.fade-in-section.from-below {
+    transform: translateY(10vh); 
+}
+
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+}
