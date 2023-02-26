@@ -1,19 +1,23 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import { getAllTagsList, getSortedPostsData } from "@/lib/posts";
+import {
+  getAllTagsList,
+  getFeaturedPostsData,
+  getSortedPostsData,
+} from "@/lib/posts";
 import Link from "next/link";
 import { NextPage, GetStaticProps } from "next";
 import dayjs from "dayjs";
 import FadeIn from "@/components/fadein";
+import FeaturedPosts from "@/components/featuredPosts";
 
 const inter = Inter({ subsets: ["latin"] });
 
 type HomeParams = {
-  allPostsData: ReturnType<typeof getSortedPostsData>;
-  tagMap: ReturnType<typeof getAllTagsList>;
+  featuredPostsData: ReturnType<typeof getSortedPostsData>;
 };
 
-const Home: NextPage<HomeParams> = ({ allPostsData, tagMap }) => {
+const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
   return (
     <>
       <Head>
@@ -75,7 +79,7 @@ const Home: NextPage<HomeParams> = ({ allPostsData, tagMap }) => {
         </div>
       </header>
 
-      <main className="container max-w-3xl mx-auto px-4 py-12 bg-white/25 backdrop-blur-sm rounded-t-lg">
+      <section className="container max-w-3xl mx-auto px-4 py-12 bg-white/25 backdrop-blur-sm rounded-t-lg">
         <h2 className="text-2xl font-serif mb-2">About this site</h2>
         <div className="mb-3 p-3 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg flex flex-col justify-start">
           Like a lot of coders, I solved issues and made progress thanks to
@@ -83,7 +87,8 @@ const Home: NextPage<HomeParams> = ({ allPostsData, tagMap }) => {
           coding issues. Hopefully this site will be a way to give back to the
           community, and maybe as well helping me remember some of the content!
         </div>
-      </main>
+      </section>
+      <FeaturedPosts postsData={featuredPostsData} />
     </>
   );
 };
@@ -91,12 +96,10 @@ const Home: NextPage<HomeParams> = ({ allPostsData, tagMap }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData("en");
-  const tagMap = getAllTagsList("en");
+  const featuredPostsData = getFeaturedPostsData("en");
   return {
     props: {
-      allPostsData,
-      tagMap,
+      featuredPostsData,
     },
   };
 };

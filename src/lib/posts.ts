@@ -51,6 +51,29 @@ export function getSortedPostsData(language: string): PostMetaData[] {
   return allPostsData;
 }
 
+export function getFeaturedPostsData(language: string): PostMetaData[] {
+  const postDirectory = path.join(process.cwd(), "content", language);
+
+  const fileNames = fs.readdirSync(postDirectory);
+  const allPostsData = fileNames.map((fileName) => {
+    // remove '.md' from filename
+    const id = fileName.replace(/\.md$/, "");
+
+    const fullPath = path.join(postDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+
+    const matterResult = matter(fileContents);
+    const postMetaData = PostMetaData.parse({
+      id,
+      ...matterResult.data,
+      date: dayjs(matterResult.data.date).toISOString(),
+    });
+    return postMetaData;
+  });
+
+  return allPostsData.slice(0, 3);
+}
+
 type PostId = {
   id: string;
 };
