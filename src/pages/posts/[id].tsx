@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { PostData } from "@/lib/posts";
 import StdLayout from "@/components/stdlayout";
 import dayjs from "dayjs";
+import Link from "next/link";
 
 const Post: NextPage<PostData> = (postData) => {
   return (
@@ -18,7 +19,7 @@ const Post: NextPage<PostData> = (postData) => {
                 className="py-1 px-4 mr-3 bg-orange-400 rounded-full"
                 key={index}
               >
-                {tag}
+                <Link href={`/tags/${tag}`}>{tag}</Link>
               </div>
             ))}
           </div>

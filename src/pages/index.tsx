@@ -10,6 +10,7 @@ import { NextPage, GetStaticProps } from "next";
 import dayjs from "dayjs";
 import FadeIn from "@/components/fadein";
 import FeaturedPosts from "@/components/featuredPosts";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -89,6 +90,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
         </div>
       </section>
       <FeaturedPosts postsData={featuredPostsData} />
+      <Footer />
     </>
   );
 };

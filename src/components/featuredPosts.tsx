@@ -1,5 +1,8 @@
 import { PostMetaData } from "@/lib/posts";
 import Link from "next/link";
+import Image from "next/image";
+
+import defaultPic from "public/img/fahrul-razi-BR6lrzCPYPk-unsplash.jpg";
 
 type FeaturedPostsProps = {
   postsData: PostMetaData[];
@@ -20,25 +23,27 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
   }
 
   return (
-    <section className="flex flex-col bg-white/30 w-full">
+    <section className="flex flex-col backdrop-blur-md w-full py-8">
       <h2 className="text-xl text-orange-300 pl-8 mb-4">Featured Posts</h2>
-      <div className="flex flex-w items-center justify-around bg-white/30 w-full">
+      <div className="flex flex-wrap items-center justify-around w-full">
         {postsData.map((post) => (
           <div
             key={post.id}
-            className="w-[350px] h-[350px] bg-orange-300/20 mr-4 p-4 flex flex-col"
+            className="w-[350px] h-[260px] bg-white flex flex-col mr-4 mb-4 p-4 border-solid border-8 border-orange-300/50 rounded-lg shadow-lg"
           >
-            <div className="w-full h-full bg-white flex flex-col p-4">
-              <Link href={`/posts/${post.id}`}>
-                <h3 className="text-lg text-orange-300">{post.title}</h3>
-              </Link>
-              <div className="self-end p-2 flex justify-around text-sm">
-                {post.tags.map((tag: string) => (
-                  <div className="tag" key={tag}>
-                    {tag}
-                  </div>
-                ))}
-              </div>
+            <Link href={`/posts/${post.id}`}>
+              <h3 className="text-2xl text-orange-300">{post.title}</h3>
+            </Link>
+            <div className="self-end p-2 flex justify-around text-sm mb-2">
+              {post.tags.map((tag: string) => (
+                <div className="tag" key={tag}>
+                  <Link href={`/tags/${tag}`}>{tag}</Link>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-orange-300/5 rounded-md shadow-sm flex-grow p-4 ">
+              {post.description}{" "}
             </div>
           </div>
         ))}

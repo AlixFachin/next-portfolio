@@ -18,8 +18,9 @@ const PostMetaData = z.object({
   date: z.string().datetime(),
   draft: z.boolean().optional(),
   tags: z.array(z.string()),
-  featuredImageUTL: z.string().optional(),
+  featuredImageURL: z.string().optional(),
   imageLegend: z.string().optional(),
+  description: z.string(),
 });
 
 export type PostMetaData = z.infer<typeof PostMetaData>;
@@ -139,4 +140,23 @@ export function getAllTagsList(language: string) {
   });
 
   return Object.fromEntries(tagMap);
+}
+
+export function getPostsIdsForTag(language: string, tag: string) {
+  const postDirectory = path.join(process.cwd(), "content", language);
+
+  const postIdList: string[] = [];
+
+  const fileNames = fs.readdirSync(postDirectory);
+  fileNames.forEach((fileName) => {
+    const fullPath = path.join(postDirectory, fileName);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+
+    const matterResult = matter(fileContents);
+    if (matterResult.data.tags.includes(tag)) {
+      postIdList.push(fileName.replace(/\.md$/, ""));
+    }
+  });
+
+  return postIdList;
 }
