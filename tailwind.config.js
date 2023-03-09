@@ -18,7 +18,7 @@ module.exports = {
         'inherit': 'inherit',
     },
     fontFamily: {
-        sans: ['Lato', 'sans-serif'],
+        sans: ['var(--font-source-code-pro)', 'Lato', 'sans-serif'],
         serif: ['Nunito', 'serif'],
         title: [ '"Berkshire Swash"'],
     },

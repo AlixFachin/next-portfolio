@@ -1,17 +1,29 @@
+import BlogMetaCard from "@/components/blogMetaCard";
 import StdLayout from "@/components/stdlayout";
-import { getAllTagsList, getPostsIdsForTag } from "@/lib/posts";
+import {
+  getAllTagsList,
+  getPostsMetaDataForTag,
+  PostMetaData,
+} from "@/lib/posts";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 type TagPageProps = {
-  postIdList: string[];
+  tag: string;
+  postDataList: PostMetaData[];
 };
 
-const TagPage: NextPage<TagPageProps> = ({ postIdList }) => {
+const TagPage: NextPage<TagPageProps> = ({ tag, postDataList }) => {
   return (
     <StdLayout>
+      <h1 className="text-orange-300 text-3xl mb-6 p-4 rounded-sm">
+        Blogs with the tag {tag}{" "}
+      </h1>
       <div>
-        {postIdList.map((postId) => (
-          <div> {postId} </div>
+        {postDataList.map((postData, index) => (
+          <BlogMetaCard
+            postData={postData}
+            key={`post-${postData.id}-${index}`}
+          />
         ))}
       </div>
     </StdLayout>
@@ -21,11 +33,11 @@ const TagPage: NextPage<TagPageProps> = ({ postIdList }) => {
 export default TagPage;
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-  const tagMap = getAllTagsList("en");
+  const tagList = getAllTagsList("en");
 
-  const paths = Object.keys(tagMap).map((tag) => ({
+  const paths = tagList.map((tagData) => ({
     params: {
-      tag: tag,
+      tag: tagData.tag,
     },
   }));
 
@@ -42,10 +54,11 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
     };
   }
 
-  const postIdList = getPostsIdsForTag("en", params.tag);
+  const postDataList = getPostsMetaDataForTag("en", params.tag);
   return {
     props: {
-      postIdList: postIdList,
+      tag: params.tag,
+      postDataList: postDataList,
     },
   };
 };

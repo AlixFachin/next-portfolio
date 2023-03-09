@@ -126,7 +126,7 @@ export async function getPostData(
 
 export function getAllTagsList(language: string) {
   const postDirectory = path.join(process.cwd(), "content", language);
-  const tagMap = new Map<string, number>();
+  const tagMap: Record<string, number> = {};
 
   const fileNames = fs.readdirSync(postDirectory);
   fileNames.forEach((fileName) => {
@@ -135,17 +135,26 @@ export function getAllTagsList(language: string) {
 
     const matterResult = matter(fileContents);
     for (let tag of matterResult.data.tags) {
-      tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
+      if (!tagMap[tag]) {
+        tagMap[tag] = 0;
+      }
+      tagMap[tag] = tagMap[tag] + 1;
     }
   });
 
-  return Object.fromEntries(tagMap);
+  const result: { tag: string; frequency: number }[] = [];
+
+  for (const tag of Object.keys(tagMap)) {
+    result.push({ tag: tag, frequency: tagMap[tag] });
+  }
+
+  return result.sort((a, b) => b.frequency - a.frequency);
 }
 
-export function getPostsIdsForTag(language: string, tag: string) {
+export function getPostsMetaDataForTag(language: string, tag: string) {
   const postDirectory = path.join(process.cwd(), "content", language);
 
-  const postIdList: string[] = [];
+  const postDataList: PostMetaData[] = [];
 
   const fileNames = fs.readdirSync(postDirectory);
   fileNames.forEach((fileName) => {
@@ -154,9 +163,14 @@ export function getPostsIdsForTag(language: string, tag: string) {
 
     const matterResult = matter(fileContents);
     if (matterResult.data.tags.includes(tag)) {
-      postIdList.push(fileName.replace(/\.md$/, ""));
+      const postMetaData = PostMetaData.parse({
+        id: fileName.replace(/\.md$/, ""),
+        ...matterResult.data,
+        date: dayjs(matterResult.data.date).toISOString(),
+      });
+      postDataList.push(postMetaData);
     }
   });
 
-  return postIdList;
+  return postDataList;
 }

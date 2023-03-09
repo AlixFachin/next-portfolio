@@ -3,9 +3,10 @@ import { useEffect, useState, useRef, useMemo } from "react";
 export interface FadeInProps {
   children?: React.ReactNode;
   direction: "from-left" | "from-right" | "from-below" | "from-above" | "none";
+  delay?: number;
 }
 
-const FadeIn = ({ children, direction }: FadeInProps) => {
+const FadeIn = ({ children, direction, delay }: FadeInProps) => {
   const [isVisible, setVisible] = useState(false);
   const domRef = useRef<HTMLDivElement>(null);
 
@@ -15,7 +16,12 @@ const FadeIn = ({ children, direction }: FadeInProps) => {
         entries.forEach((entry) => {
           console.log(JSON.stringify(entry));
           if (entry.target === (domRef.current as Element)) {
-            setVisible(entry.isIntersecting);
+            if (delay && entry.isIntersecting) {
+              // we don't take into account the delay when hide element
+              setTimeout(() => setVisible(entry.isIntersecting), delay);
+            } else {
+              setVisible(entry.isIntersecting);
+            }
           }
         });
       },

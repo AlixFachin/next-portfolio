@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 import FadeIn from "@/components/fadein";
 import FeaturedPosts from "@/components/featuredPosts";
 import Footer from "@/components/footer";
+import BioSummary from "@/components/bioSummary";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,10 +31,10 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="h-1/2 py-8 ">
+      <header className="h-1/2 py-8">
         <FadeIn direction="from-left">
           <h1 className="font-title text-black text-6xl pl-8">
-            Welcome to alix-fachin.dev
+            Welcome to Code & Pastries
           </h1>
         </FadeIn>
 
@@ -80,7 +81,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
         </div>
       </header>
 
-      <section className="container max-w-3xl mx-auto px-4 py-12 bg-white/25 backdrop-blur-sm rounded-t-lg">
+      <section className="container max-w-3xl mx-auto px-4 py-12 bg-white/50 backdrop-blur-sm rounded-t-lg">
         <h2 className="text-2xl font-serif mb-2">About this site</h2>
         <div className="mb-3 p-3 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg flex flex-col justify-start">
           Like a lot of coders, I solved issues and made progress thanks to
@@ -90,6 +91,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
         </div>
       </section>
       <FeaturedPosts postsData={featuredPostsData} />
+      <BioSummary />
       <Footer />
     </>
   );
