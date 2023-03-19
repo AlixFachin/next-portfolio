@@ -23,8 +23,25 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
   }
 
   return (
-    <section className="flex flex-col backdrop-blur-md w-full py-8">
-      <h2 className="text-xl text-orange-300 pl-8 mb-4">Featured Posts</h2>
+    <section className="flex flex-col backdrop-blur-md w-full py-8 bg-white/30">
+      <div className="flex items-center">
+        <h2 className="text-3xl text-orange-300 pl-8 mb-4 mr-10">
+          Featured Posts
+        </h2>
+        <div
+          role="button"
+          className="bg-orange-400 max-h-10 rounded-lg px-4 py-2 mr-8"
+        >
+          <Link href="/posts">All Posts</Link>
+        </div>
+        <div
+          role="button"
+          className="bg-orange-400 max-h-10 rounded-lg px-4 py-2"
+        >
+          <Link href="/tags">All Tags</Link>
+        </div>
+        <div className="flex-grow max-w-[30%]"></div>
+      </div>
       <div className="flex flex-wrap items-center justify-evenly w-full">
         {postsData.map((post) => (
           <div
@@ -47,15 +64,6 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
             </div>
           </div>
         ))}
-      </div>
-      <div className="p-4 flex justify-end">
-        <div role="button" className="bg-orange-400 rounded-lg px-4 py-2 mr-8">
-          <Link href="/posts">All Posts</Link>
-        </div>
-        <div role="button" className="bg-orange-400 rounded-lg px-4 py-2">
-          <Link href="/tags">All Tags</Link>
-        </div>
-        <div className="flex-grow max-w-[30%]"></div>
       </div>
     </section>
   );

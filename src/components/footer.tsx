@@ -43,15 +43,19 @@ const Footer = () => {
         </svg>
       </div>
       <div className="flex flex-col items-center justify-end h-full text-sm pb-2 text-white/90 italic">
-        <div className="flex items-center justify-center mb-1 text-3xl">
-          <a href="https://www.linkedin.com/in/alix-fachin/" className="mr-5">
-            <FontAwesomeIcon icon={faLinkedin} />
-          </a>
-          <a href="https://github.com/AlixFachin">
-            <FontAwesomeIcon icon={faGithub} />
-          </a>
+        <div className="flex items-center justify-center mb-3 py-1">
+          <div className="mr-8"> {copyright} </div>
+          <div className="w-[20px] hover:text-orange-400 mr-5">
+            <a href="https://www.linkedin.com/in/alix-fachin/">
+              <FontAwesomeIcon icon={faLinkedin} />
+            </a>
+          </div>
+          <div className="w-[20px] hover:text-orange-400">
+            <a href="https://github.com/AlixFachin">
+              <FontAwesomeIcon icon={faGithub} />
+            </a>
+          </div>
         </div>
-        <p className="mb-2"> {copyright} </p>
         <p className="footer-disclaimer">
           Realized with love, sweat and coffee (maybe in a different order)
           using <a href="https://nextjs.org">Next.js</a>
