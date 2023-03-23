@@ -7,6 +7,7 @@ import FadeIn from "@/components/fadein";
 import FeaturedPosts from "@/components/featuredPosts";
 import Footer from "@/components/footer";
 import BioSummary from "@/components/bioSummary";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,11 @@ type HomeParams = {
 };
 
 const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
+  useEffect(() => {
+    // @ts-ignore
+    particlesJS.load("particles-js", "/particles.json");
+  }, []);
+
   return (
     <>
       <Head>
@@ -30,7 +36,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
         src="/particles.js"
         onLoad={() => {
           // @ts-ignore
-          particlesJS.load("particles-js", "/particles.json");
+          // particlesJS.load("particles-js", "/particles.json");
         }}
       />
 
