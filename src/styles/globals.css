@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 article > h1 {
-    @apply font-serif text-5xl text-orange-300/70 mb-4;
+    @apply font-headers text-5xl text-orange-300/70 mb-4;
 }
 
 section h2 {
-    @apply font-serif text-4xl text-orange-300/70 mb-2 mt-4;
+    @apply font-headers text-4xl text-orange-300/70 mb-2 mt-4;
 }
 
 section h3 {
-    @apply font-serif text-xl text-orange-300/60 mb-2 mt-4;
+    @apply font-headers text-xl text-orange-300/60 mb-2 mt-4;
 }
 
 section ul {

@@ -6,14 +6,16 @@ import defaultPic from "public/img/fahrul-razi-BR6lrzCPYPk-unsplash.jpg";
 
 type FeaturedPostsProps = {
   postsData: PostMetaData[];
+  extraClass?: string;
 };
 
 const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
   postsData,
+  extraClass,
 }) => {
   if (postsData.length === 0) {
     return (
-      <section>
+      <section className={extraClass}>
         <p>
           Cannot find any featured posts! Have a look at the{" "}
           <Link href="/posts">blog roll</Link> instead...
@@ -23,7 +25,13 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
   }
 
   return (
-    <section className="flex flex-col backdrop-blur-md w-full py-8 bg-white/30">
+    <section
+      className={
+        extraClass +
+        " flex flex-col backdrop-blur-md max-w-3xl py-8 px-10 bg-white/30"
+      }
+    >
+      {/* 'All tags' and 'All Posts' buttons */}
       <div className="flex items-center">
         <h2 className="text-3xl text-orange-300 pl-8 mb-4 mr-10">
           Featured Posts
@@ -40,13 +48,18 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
         >
           <Link href="/tags">All Tags</Link>
         </div>
-        <div className="flex-grow max-w-[30%]"></div>
+        <div className="flex-grow"></div>
       </div>
-      <div className="flex flex-wrap items-center justify-evenly w-full">
-        {postsData.map((post) => (
+      {/* Aligning the boxes displaying post summaries */}
+      <div className="flex flex-col flex-wrap items-center justify-evenly w-full">
+        {postsData.map((post, index) => (
           <div
             key={post.id}
-            className="w-[350px] h-[260px] bg-white flex flex-col mr-4 mb-4 p-4 border-solid border-8 border-orange-300/50 rounded-lg shadow-lg"
+            className={`w-[350px] h-[260px] bg-white
+                flex flex-col mr-4 mb-4 p-4 border-solid border-8 border-orange-300/50
+                rounded-lg shadow-lg ${
+                  index % 2 === 0 ? "self-start" : "self-end"
+                }`}
           >
             <Link href={`/posts/${post.id}`}>
               <h3 className="text-2xl text-orange-300">{post.title}</h3>

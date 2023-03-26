@@ -78,7 +78,7 @@ const Header = () => {
           </div>
         ))}
         <div className="flex-grow"></div>
-        <div className="mr-8">🇺🇸</div>
+        {/* <div className="mr-8">🇺🇸</div> */}
       </div>
     </header>
   );

@@ -27,7 +27,7 @@ export type PostMetaData = z.infer<typeof PostMetaData>;
 export type PostData = PostMetaData & { contentHtml: string };
 
 export function getSortedPostsData(language: string): PostMetaData[] {
-  const postDirectory = path.join(process.cwd(), "content", language);
+  const postDirectory = path.join(process.cwd(), "content/blog", language);
 
   const fileNames = fs.readdirSync(postDirectory);
   const allPostsData = fileNames.map((fileName) => {
@@ -53,7 +53,7 @@ export function getSortedPostsData(language: string): PostMetaData[] {
 }
 
 export function getFeaturedPostsData(language: string): PostMetaData[] {
-  const postDirectory = path.join(process.cwd(), "content", language);
+  const postDirectory = path.join(process.cwd(), "content/blog", language);
 
   const fileNames = fs.readdirSync(postDirectory);
   const allPostsData = fileNames.map((fileName) => {
@@ -82,7 +82,7 @@ type PostId = {
 type AllPostsIdsReturn = GetStaticPathsResult<PostId>["paths"];
 
 export function getAllPostsIds(language: string): AllPostsIdsReturn {
-  const postDirectory = path.join(process.cwd(), "content", language);
+  const postDirectory = path.join(process.cwd(), "content/blog", language);
 
   const fileNames = fs.readdirSync(postDirectory);
   const result = fileNames.map((fileName) => ({
@@ -97,7 +97,7 @@ export async function getPostData(
   language: string,
   id: string
 ): Promise<PostData> {
-  const postsDirectory = path.join(process.cwd(), "content", language);
+  const postsDirectory = path.join(process.cwd(), "content/blog", language);
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -125,7 +125,7 @@ export async function getPostData(
 }
 
 export function getAllTagsList(language: string) {
-  const postDirectory = path.join(process.cwd(), "content", language);
+  const postDirectory = path.join(process.cwd(), "content/blog", language);
   const tagMap: Record<string, number> = {};
 
   const fileNames = fs.readdirSync(postDirectory);
@@ -152,7 +152,7 @@ export function getAllTagsList(language: string) {
 }
 
 export function getPostsMetaDataForTag(language: string, tag: string) {
-  const postDirectory = path.join(process.cwd(), "content", language);
+  const postDirectory = path.join(process.cwd(), "content/blog", language);
 
   const postDataList: PostMetaData[] = [];
 

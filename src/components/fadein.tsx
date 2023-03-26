@@ -14,7 +14,6 @@ const FadeIn = ({ children, direction, delay }: FadeInProps) => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log(JSON.stringify(entry));
           if (entry.target === (domRef.current as Element)) {
             if (delay && entry.isIntersecting) {
               // we don't take into account the delay when hide element

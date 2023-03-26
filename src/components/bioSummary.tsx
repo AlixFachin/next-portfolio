@@ -19,20 +19,18 @@ function displayTagsWithBadges(tagsString: string) {
   );
 }
 
-const BioSummary: React.FunctionComponent = () => {
+const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
+  extraClass,
+}) => {
   return (
-    <section className="container max-w-3xl mx-auto px-4 py-12 bg-white/50 backdrop-blur-sm rounded-t-lg flex flex-col items-center justify-start">
-      <FadeIn direction="from-above">
-        <h2>ABOUT ME</h2>
-      </FadeIn>
+    <section
+      className={`container max-w-3xl mx-auto px-4 py-12 bg-white/50 backdrop-blur-sm 
+        rounded-t-lg flex flex-col items-center justify-start
+        ${extraClass ? " " + extraClass : ""}`}
+    >
+      <h2>ABOUT ME</h2>
+
       <div className="bio-container">
-        <FadeIn direction="from-left" delay={200}>
-          <div className="image-placeholder">
-            {
-              // <GatsbyImage image={data.file.childImageSharp.gatsbyImageData} alt="my pic" />
-            }
-          </div>
-        </FadeIn>
         <FadeIn direction="from-right" delay={200}>
           <div className="bio-text">
             <p>
