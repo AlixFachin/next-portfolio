@@ -18,10 +18,10 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
   return (
     <>
       <Head>
-        <title>Alix Fachin Blog</title>
+        <title>Code and Pastries | Home Page</title>
         <meta
           name="description"
-          content="Home Page of blog dedicated to development"
+          content="Home Page for Alix Fachin's blog dedicated to software development tips"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
