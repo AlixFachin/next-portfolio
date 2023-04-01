@@ -23,7 +23,23 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
           name="description"
           content="Home Page for Alix Fachin's blog dedicated to software development tips"
         />
+        <meta name="generator" content="next.js" />
+        <meta
+          name="keywords"
+          content="blog, software development, coding, JavaScript"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <meta property="og:title" content="Code and Pastries | Home Page" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="" />
+        <meta property="og:url" content="" />
+        <meta
+          property="og:description"
+          content="Home Page for Alix Fachin's blog dedicated to software development tips"
+        />
+        <meta property="og:site_name" content="Code and Pastries" />
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Script
