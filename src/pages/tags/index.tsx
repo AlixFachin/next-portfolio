@@ -15,7 +15,7 @@ const TagList: NextPage<TagListProps> = ({ tagList }) => {
   if (!tagList) {
     return (
       <StdLayout>
-        <h1 className="text-4xl text-orange-300 bg-white/75 rounded-md p-4">
+        <h1 className="text-4xl text-orange-200 bg-white/75 rounded-md p-4">
           Tag Cloud
         </h1>
         <div>No tags found!</div>

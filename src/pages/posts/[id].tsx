@@ -35,7 +35,7 @@ const Post: NextPage<PostData> = (postData) => {
       <StdLayout>
         <article className="p-8 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg flex flex-col ">
           <header className="bg-white/50 p-4 rounded-md shadow-lg">
-            <h1 className="text-5xl text-orange-300 mb-6">{postData.title} </h1>
+            <h1 className="text-5xl text-orange-200 mb-6">{postData.title} </h1>
             <div>{dayjs(postData.date).format("MMM-DD-YYYY")}</div>
             <div className="self-end p-2 flex justify-start text-sm ml-8">
               {postData.tags.map((tag, index) => (

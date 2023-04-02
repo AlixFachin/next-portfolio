@@ -33,7 +33,7 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
     >
       {/* 'All tags' and 'All Posts' buttons */}
       <div className="flex items-center">
-        <h2 className="text-5xl text-orange-300 pl-8 mb-6 mr-10">
+        <h2 className="text-5xl text-orange-200 pl-8 mb-6 mr-10">
           Featured Posts
         </h2>
         <div
@@ -62,13 +62,13 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
                 }`}
           >
             <Link href={`/posts/${post.id}`}>
-              <h3 className="text-2xl text-orange-300">{post.title}</h3>
+              <h3 className="text-2xl text-orange-200">{post.title}</h3>
             </Link>
             <div className="self-end p-2 flex justify-around text-sm mb-2">
               {post.tags.map((tag: string) => (
-                <div className="tag" key={tag}>
-                  <Link href={`/tags/${tag}`}>{tag}</Link>
-                </div>
+                <Link href={`/tags/${tag}`} key={tag}>
+                  <div className="tag">{tag}</div>
+                </Link>
               ))}
             </div>
 

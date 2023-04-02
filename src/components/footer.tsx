@@ -46,12 +46,15 @@ const Footer = () => {
         <div className="flex items-center justify-center mb-3 py-1">
           <div className="mr-8"> {copyright} </div>
           <div className="w-[20px] hover:text-orange-400 mr-5">
-            <a href="https://www.linkedin.com/in/alix-fachin/">
+            <a
+              href="https://www.linkedin.com/in/alix-fachin/"
+              aria-label="My LinkedIn Page"
+            >
               <FontAwesomeIcon icon={faLinkedin} />
             </a>
           </div>
           <div className="w-[20px] hover:text-orange-400">
-            <a href="https://github.com/AlixFachin">
+            <a href="https://github.com/AlixFachin" aria-label="My GitHub page">
               <FontAwesomeIcon icon={faGithub} />
             </a>
           </div>
