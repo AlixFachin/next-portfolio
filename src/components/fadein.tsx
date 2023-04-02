@@ -32,7 +32,7 @@ const FadeIn = ({ children, direction, delay }: FadeInProps) => {
         observer.unobserve(domRef.current as Element);
       }
     };
-  }, []);
+  }, [delay]);
 
   const classDirection = useMemo(() => {
     switch (direction) {
