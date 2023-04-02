@@ -15,7 +15,7 @@ type TagPageProps = {
 const TagPage: NextPage<TagPageProps> = ({ tag, postDataList }) => {
   return (
     <StdLayout>
-      <h1 className="text-orange-300 text-3xl mb-6 p-4 rounded-sm">
+      <h1 className="text-3xl font-serif mb-6 p-4 rounded-sm">
         Blogs with the tag {tag}{" "}
       </h1>
       <div>

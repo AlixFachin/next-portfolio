@@ -24,7 +24,7 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
 }) => {
   return (
     <section
-      className={`container max-w-3xl mx-auto px-4 py-12 bg-white/50 backdrop-blur-sm 
+      className={`container max-w-3xl mx-auto px-4 py-12 bg-white/70 backdrop-blur-sm 
         rounded-t-lg flex flex-col items-center justify-start
         ${extraClass ? " " + extraClass : ""}`}
     >

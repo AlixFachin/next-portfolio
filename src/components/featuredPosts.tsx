@@ -28,23 +28,23 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
     <section
       className={
         extraClass +
-        " flex flex-col backdrop-blur-md max-w-3xl py-8 px-10 bg-white/30"
+        " flex flex-col backdrop-blur-md max-w-3xl mb-8 w-full py-8 px-10 bg-white/30"
       }
     >
       {/* 'All tags' and 'All Posts' buttons */}
       <div className="flex items-center">
-        <h2 className="text-3xl text-orange-300 pl-8 mb-4 mr-10">
+        <h2 className="text-5xl text-orange-300 pl-8 mb-6 mr-10">
           Featured Posts
         </h2>
         <div
           role="button"
-          className="bg-orange-400 max-h-10 rounded-lg px-4 py-2 mr-8"
+          className="bg-orange-400 hover:bg-orange-300/70 max-h-10 rounded-lg px-4 py-2 mr-8"
         >
           <Link href="/posts">All Posts</Link>
         </div>
         <div
           role="button"
-          className="bg-orange-400 max-h-10 rounded-lg px-4 py-2"
+          className="bg-orange-400 hover:bg-orange-300/70 max-h-10 rounded-lg px-4 py-2"
         >
           <Link href="/tags">All Tags</Link>
         </div>

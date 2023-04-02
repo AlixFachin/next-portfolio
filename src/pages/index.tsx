@@ -8,6 +8,9 @@ import FeaturedPosts from "@/components/featuredPosts";
 import Footer from "@/components/footer";
 import BioSummary from "@/components/bioSummary";
 
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const inter = Inter({ subsets: ["latin"] });
 
 type HomeParams = {
@@ -67,16 +70,39 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
               Welcome to Code & Pastries
             </h1>
           </FadeIn>
-          <h2 className="text-2xl font-serif mb-2">About this site</h2>
-          <div className="mb-3 p-3 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg flex flex-col justify-start">
-            Like a lot of coders, I solved issues and made progress thanks to
-            countless people who wrote some blog posts and articles regarding
-            coding issues. Hopefully this site will be a way to give back to the
-            community, and maybe as well helping me remember some of the
-            content!
+          <div className="flex flex-col max-h-[calc(100vh-13rem)] h-full">
+            <h2 className="text-2xl font-serif mb-2">About this site</h2>
+            <div
+              className="mb-3 p-3 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg
+                flex flex-col justify-start
+                max-w-3xl"
+            >
+              <p>
+                Like a lot of coders, I solved issues and made progress thanks
+                to countless people who wrote some blog posts and articles
+                regarding coding issues. Hopefully this site will be a way to
+                give back to the community, and maybe as well helping me
+                remember some of the content!
+              </p>
+              <h3>Why Code and Pastries?</h3>
+              <p>
+                Mostly because I thought it would be an original title, and
+                because I wanted at some point to write a blog about baking. I
+                am curious to see what happens if I force myself to only
+                (mostly?) use pastry-related terms for examples instead of{" "}
+                <code>foo</code> and <code>bar</code>!
+              </p>
+            </div>
+            <div className="flex-grow"></div>
+            <div
+              className="invisible md:visible self-center text-3xl text-orange-300 mt-8 max-w-[100px] w-[50px]
+                motion-safe:animate-bounce"
+            >
+              <FontAwesomeIcon icon={faArrowDown} beat />
+            </div>
           </div>
         </section>
-        <div className="sticky top-0 left-0 -z-10 w-full">
+        <div className="sticky top-0 left-0 -z-10 w-full ">
           <svg
             width="100%"
             height="100%"

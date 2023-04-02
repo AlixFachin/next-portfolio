@@ -23,12 +23,16 @@ section .highlight {
     @apply my-2;
 }
 
+article a {
+    @apply text-orange-300 underline;
+}
+
 .tag {
     @apply py-1 px-4 mr-3 bg-orange-400 hover:bg-orange-300 rounded-full transition-colors;
 }
 
 code {
-    @apply p-1  bg-white ;
+    @apply p-1  bg-grey ;
 }
 
 .highlight code {
@@ -36,7 +40,11 @@ code {
 }
 
 .highlight pre {
-    @apply py-4 px-2 rounded-lg
+    @apply py-4 px-2 rounded-lg;
+}
+
+section > code {
+    @apply bg-black;
 }
 
 @media (prefers-reduced-motion: no-preference) {

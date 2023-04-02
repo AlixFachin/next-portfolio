@@ -25,13 +25,13 @@ const TagList: NextPage<TagListProps> = ({ tagList }) => {
 
   return (
     <StdLayout>
-      <h1 className="text-4xl text-orange-300 bg-white/75 rounded-md p-4">
+      <h1 className="text-5xl font-serif mb-2 bg-white/75 rounded-md p-4">
         List of all the tags used on the site
       </h1>
       <div className="bg-white/60 rounded-md flex flex-col p-4">
         {tagList.map((tagData) => (
           <div key="tag" className="tag max-w-min mb-2">
-            <Link href={`/tags/${tagData.frequency}`}>{tagData.tag}</Link>
+            <Link href={`/tags/${tagData.tag}`}>{tagData.tag}</Link>
           </div>
         ))}
       </div>

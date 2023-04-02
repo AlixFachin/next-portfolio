@@ -21,12 +21,17 @@ const BlogMetaCard: React.FC<BlogMetaCardProps> = ({ postData }) => {
         </div>
         <div className="self-end p-2 flex justify-around text-sm">
           {postData.tags.map((tag: string) => (
-            <div className="tag" key={tag}>
-              {tag}
-            </div>
+            <Link href={`/tags/${tag}`} key={tag}>
+              <div className="tag">{tag}</div>
+            </Link>
           ))}
         </div>
       </div>
+      {postData.description ? (
+        <div className="bg-white py-4 px-2">{postData.description}</div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
