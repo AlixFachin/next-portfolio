@@ -1,7 +1,7 @@
 ---
 title: "About JavaScript Set"
 date: 2022-10-29T20:52:01+09:00
-draft: true
+draft: false
 language_prog: JavaScript
 language: en
 tags: [JavaScript, Beginner]
