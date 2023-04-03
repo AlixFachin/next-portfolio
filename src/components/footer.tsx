@@ -59,7 +59,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <p className="footer-disclaimer">
+        <p className="text-center">
           Realized with love, sweat and coffee (maybe in a different order)
           using <a href="https://nextjs.org">Next.js</a>
         </p>

@@ -44,33 +44,43 @@ export function getSortedPostsData(language: string): PostMetaData[] {
       date: dayjs(matterResult.data.date).toISOString(),
     });
 
-    // TODO: Sort the result
-
     return postMetaData;
   });
 
-  return allPostsData;
+  return allPostsData
+    .filter(
+      (metaData) => metaData.draft === undefined || metaData.draft === false
+    )
+    .sort((metaData1, metaData2) =>
+      // We want to sort in descending order, so we compare date2 with date1
+      dayjs(metaData2.date).diff(metaData1.date, "date")
+    );
 }
 
 export function getFeaturedPostsData(language: string): PostMetaData[] {
   const postDirectory = path.join(process.cwd(), "content/blog", language);
 
   const fileNames = fs.readdirSync(postDirectory);
-  const allPostsData = fileNames.map((fileName) => {
-    // remove '.md' from filename
-    const id = fileName.replace(/\.md$/, "");
+  const allPostsData = fileNames
+    .map((fileName) => {
+      // remove '.md' from filename
+      const id = fileName.replace(/\.md$/, "");
 
-    const fullPath = path.join(postDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+      const fullPath = path.join(postDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
 
-    const matterResult = matter(fileContents);
-    const postMetaData = PostMetaData.parse({
-      id,
-      ...matterResult.data,
-      date: dayjs(matterResult.data.date).toISOString(),
-    });
-    return postMetaData;
-  });
+      const matterResult = matter(fileContents);
+      const postMetaData = PostMetaData.parse({
+        id,
+        ...matterResult.data,
+        date: dayjs(matterResult.data.date).toISOString(),
+      });
+      return postMetaData;
+    })
+    .filter(
+      (postMetaData) =>
+        postMetaData.draft === undefined || postMetaData.draft === false
+    );
 
   return allPostsData.slice(0, 3);
 }
@@ -135,10 +145,12 @@ export function getAllTagsList(language: string) {
 
     const matterResult = matter(fileContents);
     for (let tag of matterResult.data.tags) {
-      if (!tagMap[tag]) {
-        tagMap[tag] = 0;
+      if (!matterResult.data.draft) {
+        if (!tagMap[tag]) {
+          tagMap[tag] = 0;
+        }
+        tagMap[tag] = tagMap[tag] + 1;
       }
-      tagMap[tag] = tagMap[tag] + 1;
     }
   });
 
@@ -162,7 +174,7 @@ export function getPostsMetaDataForTag(language: string, tag: string) {
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     const matterResult = matter(fileContents);
-    if (matterResult.data.tags.includes(tag)) {
+    if (matterResult.data.tags.includes(tag) && !matterResult.data.draft) {
       const postMetaData = PostMetaData.parse({
         id: fileName.replace(/\.md$/, ""),
         ...matterResult.data,

@@ -33,22 +33,26 @@ const Post: NextPage<PostData> = (postData) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StdLayout>
-        <article className="p-8 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg flex flex-col ">
-          <header className="bg-white/50 p-4 rounded-md shadow-lg">
-            <h1 className="text-5xl text-orange-200 mb-6">{postData.title} </h1>
-            <div>{dayjs(postData.date).format("MMM-DD-YYYY")}</div>
-            <div className="self-end p-2 flex justify-start text-sm ml-8">
+        <article className="flex flex-col ">
+          <header className="bg-white/80 p-4 rounded-md shadow-lg flex flex-col">
+            <h1 className="text-3xl md:text-5xl font-serif mb-4 py-4 px-2 rounded-lg bg-gradient-to-br from-orange-300 to-orange-400">
+              {postData.title}{" "}
+            </h1>
+            <div className="self-end p-2 flex justify-start text-sm sm:ml-8">
               {postData.tags.map((tag, index) => (
-                <div
-                  className="py-1 px-4 mr-3 bg-orange-400 rounded-full"
-                  key={index}
-                >
-                  <Link href={`/tags/${tag}`}>{tag}</Link>
-                </div>
+                <Link href={`/tags/${tag}`} key={index}>
+                  <div
+                    className="py-1 px-4 mr-3 bg-orange-400 rounded-full text-black"
+                    aria-role="button"
+                  >
+                    {tag}
+                  </div>
+                </Link>
               ))}
             </div>
+            <div>{dayjs(postData.date).format("MMM-DD-YYYY")}</div>
           </header>
-          <section className="mt-8">
+          <section className="mt-8 p-8 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg ">
             <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
           </section>
         </article>

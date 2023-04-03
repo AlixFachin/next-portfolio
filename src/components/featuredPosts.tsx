@@ -32,22 +32,26 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
       }
     >
       {/* 'All tags' and 'All Posts' buttons */}
-      <div className="flex items-center">
-        <h2 className="text-5xl text-orange-200 pl-8 mb-6 mr-10">
+      <div className="flex items-center flex-wrap mb-4">
+        <h2 className="text-3xl md:text-5xl text-orange-200  md:pl-8 mb-6 md:mr-10">
           Featured Posts
         </h2>
-        <div
-          role="button"
-          className="bg-orange-400 hover:bg-orange-300/70 max-h-10 rounded-lg px-4 py-2 mr-8"
-        >
-          <Link href="/posts">All Posts</Link>
-        </div>
-        <div
-          role="button"
-          className="bg-orange-400 hover:bg-orange-300/70 max-h-10 rounded-lg px-4 py-2"
-        >
-          <Link href="/tags">All Tags</Link>
-        </div>
+        <Link href="/posts" aria-label="all posts page">
+          <div
+            role="button"
+            className="bg-orange-400 hover:bg-orange-300/70 max-h-10 rounded-lg px-4 py-2 mr-8 drop-shadow-md"
+          >
+            All Posts
+          </div>
+        </Link>
+        <Link href="/tags" aria-label="all tags page">
+          <div
+            role="button"
+            className="bg-orange-400 hover:bg-orange-300/70 max-h-10 rounded-lg px-4 py-2 drop-shadow-md"
+          >
+            All Tags
+          </div>
+        </Link>
         <div className="flex-grow"></div>
       </div>
       {/* Aligning the boxes displaying post summaries */}
@@ -55,14 +59,14 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
         {postsData.map((post, index) => (
           <div
             key={post.id}
-            className={`w-[350px] h-[260px] bg-white
+            className={` w-full sm:w-[550px] h-[260px] bg-white
                 flex flex-col mr-4 mb-4 p-4 border-solid border-8 border-orange-300/50
                 rounded-lg shadow-lg ${
-                  index % 2 === 0 ? "self-start" : "self-end"
+                  index % 2 === 0 ? "sm:self-start" : "sm:self-end"
                 }`}
           >
             <Link href={`/posts/${post.id}`}>
-              <h3 className="text-2xl text-orange-200">{post.title}</h3>
+              <h3 className="sm:text-2xl text-orange-200">{post.title}</h3>
             </Link>
             <div className="self-end p-2 flex justify-around text-sm mb-2">
               {post.tags.map((tag: string) => (

@@ -64,7 +64,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
           ></div>
           <FadeIn direction="from-left">
             <h1
-              className="text-6xl pl-8 font-headers font-bold bg-clip-text text-transparent
+              className=" text-4xl md:text-6xl pl-8 font-headers font-bold bg-clip-text text-transparent
            bg-gradient-to-tl from-orange-300 to-orange-400"
             >
               Welcome to Code & Pastries

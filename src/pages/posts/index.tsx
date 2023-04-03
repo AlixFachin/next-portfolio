@@ -42,7 +42,9 @@ const AllPosts: NextPage<BlogRollParams> = ({ allPostsData }) => {
       </Head>
       <StdLayout>
         <main className="container max-w-3xl mx-auto px-4 py-12 bg-white/25 backdrop-blur-sm rounded-t-lg">
-          <h1 className="text-5xl font-serif mb-2">All Blog Posts</h1>
+          <h1 className="text-5xl font-serif mb-4 py-4 px-2 rounded-lg bg-gradient-to-l from-orange-300 to-orange-400">
+            All Blog Posts
+          </h1>
           <section className="blogRoll">
             {allPostsData.map((postData, loop_index) => (
               <BlogMetaCard
