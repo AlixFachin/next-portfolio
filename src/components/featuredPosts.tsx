@@ -33,7 +33,7 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
     >
       {/* 'All tags' and 'All Posts' buttons */}
       <div className="flex items-center flex-wrap mb-4">
-        <h2 className="text-3xl md:text-5xl text-orange-200  md:pl-8 mb-6 md:mr-10">
+        <h2 className="text-3xl md:text-5xl font-title text-orange-200  md:pl-8 mb-6 md:mr-10">
           Featured Posts
         </h2>
         <Link href="/posts" aria-label="all posts page">

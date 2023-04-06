@@ -19,15 +19,19 @@ module.exports = {
         'grey': '#00000010',
         'red': '#Ef2D56',
         'purple': '#5F4BB6',
-        'blue': '86A5D9',
+        'blue': {
+            200: '#86A5D9',
+            300: '#0496FF',
+            400: '#006BA6',
+        },
         'inherit': 'inherit',
         'transparent': '#FFFFFF00'
     },
     fontFamily: {
         primary: ['Noto Sans', ...fontFamily.sans],
         sans: [ 'Noto Sans', 'var(--font-source-code-pro)', 'Lato', 'sans-serif'],
-        title: [ '"Berkshire Swash"'],
-        headers: ['var(--font-montserrat)', ...fontFamily.sans],
+        title: [ 'var(--font-title)'],
+        headers: ['var(--font-noto-sans)', ...fontFamily.sans],
     },
     extend: {},
   },

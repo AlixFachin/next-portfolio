@@ -30,7 +30,7 @@ const About: NextPage<StaticPageData> = (pageData) => {
         <meta property="og:site_name" content="Code and Pastries" />
       </Head>
       <main className="container max-w-3xl min-h-screen mx-auto px-4 py-12 bg-white/25 backdrop-blur-sm rounded-t-lg">
-        <h1 className="text-orange-200 text-5xl font-headers">About me</h1>
+        <h1 className="text-orange-300 font-title text-5xl">About me</h1>
         <article
           className="mt-8 prose 
             max-w-none 

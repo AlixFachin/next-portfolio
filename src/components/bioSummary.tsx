@@ -28,7 +28,7 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
         rounded-t-lg flex flex-col items-center justify-start
         ${extraClass ? " " + extraClass : ""}`}
     >
-      <h2>ABOUT ME</h2>
+      <h2 className="font-title text-orange-300">About me</h2>
 
       <div className="bio-container">
         <FadeIn direction="from-right" delay={200}>
@@ -70,8 +70,8 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
       </div>
       <div className="self-end">
         <FadeIn direction="none">
-          <div className="self-end mt-4 bg-orange-300/60 rounded-lg p-2 text-lg">
-            <Link href="/about">About me</Link>
+          <div className="self-end mt-4 bg-orange-300/60 rounded-lg p-2 px-4 text-lg shadow-md">
+            <Link href="/about">More details</Link>
           </div>
         </FadeIn>
       </div>

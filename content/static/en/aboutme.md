@@ -28,7 +28,7 @@ I was then hired by **Club Med** to be the **Product Manager for Japan Resorts**
 For a few reasons, this experience made me realize that I didn't want to become a hotel manager or collect big responsibilities in a huge hospitality company.
 So when COVID hit, new opportunities for remote work appeared and I decided to follow a software engineering bootcamp in Tokyo to polish my dev skills and re-start my career as a software engineer.
 
-# Software Engineering
+## Software Engineering
 I was always a nerd, first playing videogames on a Thomson T05, then coding in assembly language on my HP48SX in high school.
 Working in software engineering was always natural for me:
 * As a trader I made scripts in VB and in Python to visualize risks, aggregate data and generate reports

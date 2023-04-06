@@ -35,7 +35,7 @@ const Post: NextPage<PostData> = (postData) => {
       <StdLayout>
         <article className="flex flex-col ">
           <header className="bg-white/80 p-4 rounded-md shadow-lg flex flex-col">
-            <h1 className="text-3xl md:text-5xl font-serif mb-4 py-4 px-2 rounded-lg bg-gradient-to-br from-orange-300 to-orange-400">
+            <h1 className="text-3xl md:text-5xl font-serif mb-4 py-4 px-2 rounded-lg text-orange-300">
               {postData.title}{" "}
             </h1>
             <div className="self-end p-2 flex justify-start text-sm sm:ml-8">

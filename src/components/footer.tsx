@@ -7,9 +7,9 @@ const Footer = () => {
   const copyright = `copyright Alix Fachin ${dayjs().year()}`;
 
   return (
-    <footer className="relative h-[25vh] min-h-[150px]">
-      <div className="absolute h-full w-full bottom-0 left-0 -z-20">
-        <svg
+    <footer className="relative py-4">
+      <div className="absolute h-full w-full bottom-0 left-0 -z-20 bg-blue-400">
+        {/* <svg
           width="100%"
           height="100%"
           id="svg"
@@ -40,7 +40,7 @@ const Footer = () => {
             fill="url(#gradient2)"
             fillOpacity="1"
           ></path>
-        </svg>
+        </svg> */}
       </div>
       <div className="flex flex-col items-center justify-end h-full text-sm pb-2 text-white/90 italic">
         <div className="flex items-center justify-center mb-3 py-1">

@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-article > h1 {
-    @apply font-headers text-5xl text-orange-200 mb-4;
+article h1 {
+    @apply font-title text-5xl text-orange-200 mb-4 font-bold tracking-tighter;
 }
 
 section h2 {
@@ -32,7 +32,7 @@ article a {
 }
 
 code {
-    @apply p-1  bg-grey ;
+    @apply p-1  bg-grey my-3 overflow-auto;
 }
 
 .highlight code {
