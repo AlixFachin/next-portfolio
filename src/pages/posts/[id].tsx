@@ -43,7 +43,7 @@ const Post: NextPage<PostData> = (postData) => {
                 <Link href={`/tags/${tag}`} key={index}>
                   <div
                     className="py-1 px-4 mr-3 bg-orange-400 rounded-full text-black"
-                    aria-role="button"
+                    role="button"
                   >
                     {tag}
                   </div>
