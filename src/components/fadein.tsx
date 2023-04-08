@@ -26,12 +26,13 @@ const FadeIn = ({ children, direction, delay }: FadeInProps) => {
       },
       { threshold: 0.8 }
     );
-    observer.observe(domRef.current as Element);
-    return () => {
-      if (domRef.current) {
-        observer.unobserve(domRef.current as Element);
-      }
-    };
+    const observedElement = domRef.current as Element;
+    if (observedElement) {
+      observer.observe(observedElement);
+      return () => {
+        observer.unobserve(observedElement);
+      };
+    }
   }, [delay]);
 
   const classDirection = useMemo(() => {
