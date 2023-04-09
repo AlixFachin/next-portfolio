@@ -1,5 +1,6 @@
 import { getAllPostsIds, getPostData } from "@/lib/posts";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { getGHDirContent } from "@/lib/github";
 
 import { PostData } from "@/lib/posts";
 import StdLayout from "@/components/stdlayout";
@@ -63,7 +64,7 @@ const Post: NextPage<PostData> = (postData) => {
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
   // Return a list of possible values
-  const paths = getAllPostsIds("en");
+  const paths = await getAllPostsIds("en");
   return {
     paths,
     fallback: false,

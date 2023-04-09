@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const inter = Inter({ subsets: ["latin"] });
 
 type HomeParams = {
-  featuredPostsData: ReturnType<typeof getSortedPostsData>;
+  featuredPostsData: Awaited<ReturnType<typeof getSortedPostsData>>;
 };
 
 const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
@@ -154,8 +154,8 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = async () => {
-  const featuredPostsData = getFeaturedPostsData("en");
+export const getStaticProps: GetStaticProps<HomeParams> = async () => {
+  const featuredPostsData = await getFeaturedPostsData("en");
   return {
     props: {
       featuredPostsData,

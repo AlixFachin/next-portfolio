@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { GetStaticProps, NextPage } from "next";
 import { getSortedPostsData, getAllTagsList } from "@/lib/posts";
+import { getGHDirContent } from "@/lib/github";
 import FadeIn from "@/components/fadein";
 import StdLayout from "@/components/stdlayout";
 import dayjs from "dayjs";
@@ -8,8 +9,8 @@ import Head from "next/head";
 import BlogMetaCard from "@/components/blogMetaCard";
 
 type BlogRollParams = {
-  allPostsData: ReturnType<typeof getSortedPostsData>;
-  tagMap: ReturnType<typeof getAllTagsList>;
+  allPostsData: Awaited<ReturnType<typeof getSortedPostsData>>;
+  tagMap: Awaited<ReturnType<typeof getAllTagsList>>;
 };
 
 const AllPosts: NextPage<BlogRollParams> = ({ allPostsData }) => {
@@ -60,8 +61,8 @@ const AllPosts: NextPage<BlogRollParams> = ({ allPostsData }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostsData = getSortedPostsData("en");
-  const tagMap = getAllTagsList("en");
+  const allPostsData = await getSortedPostsData("en");
+  const tagMap = await getAllTagsList("en");
   return {
     props: {
       allPostsData,
