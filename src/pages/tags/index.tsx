@@ -2,13 +2,14 @@ import { GetStaticProps, NextPage } from "next";
 import StdLayout from "@/components/stdlayout";
 import { getAllTagsList } from "@/lib/posts";
 import Link from "next/link";
+2;
 
 // Objective for version 1:
 // Get post metadata for each tag
 // i.e. How many posts for each tag? When was the latest post?
 
 type TagListProps = {
-  tagList: ReturnType<typeof getAllTagsList>;
+  tagList: Awaited<ReturnType<typeof getAllTagsList>>;
 };
 
 const TagList: NextPage<TagListProps> = ({ tagList }) => {
@@ -39,8 +40,8 @@ const TagList: NextPage<TagListProps> = ({ tagList }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = ({ params }) => {
-  const tagList = getAllTagsList("en");
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const tagList = await getAllTagsList("en");
   return {
     props: {
       tagList,

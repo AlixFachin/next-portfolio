@@ -14,7 +14,8 @@ type TagPageProps = {
 };
 
 const TagPage: NextPage<TagPageProps> = ({ tag, postDataList }) => {
-  console.log(`Trying to display for tag ${tag}`, postDataList);
+  if (process.env.NODE_ENV === "development")
+    console.log(`Trying to display for tag ${tag}`, postDataList);
   return (
     <>
       <Head>
@@ -62,7 +63,7 @@ const TagPage: NextPage<TagPageProps> = ({ tag, postDataList }) => {
 export default TagPage;
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-  const tagList = getAllTagsList("en");
+  const tagList = await getAllTagsList("en");
 
   const paths = tagList.map((tagData) => ({
     params: {
@@ -76,14 +77,13 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
   };
 };
 
-export const getStaticProps: GetStaticProps = ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!params || !params.tag || Array.isArray(params.tag)) {
     return {
       notFound: true,
     };
   }
-  console.log("COUCOU");
-  const postDataList = getPostsMetaDataForTag("en", params.tag);
+  const postDataList = await getPostsMetaDataForTag("en", params.tag);
   return {
     props: {
       tag: params.tag,
