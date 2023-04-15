@@ -28,9 +28,11 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
         rounded-t-lg flex flex-col items-center justify-start
         ${extraClass ? " " + extraClass : ""}`}
     >
-      <h2 className="font-title text-orange-300">About me</h2>
+      <h2 className="font-title text-orange-300 text-5xl mb-4">
+        <Link href="/about">About me</Link>
+      </h2>
 
-      <div className="bio-container">
+      <article className="bio-container">
         <FadeIn direction="from-right" delay={200}>
           <div className="bio-text">
             <p>
@@ -61,7 +63,7 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
             </p>
           </div>
         </FadeIn>
-      </div>
+      </article>
       <div className="skillSetList">
         <h3>Experienced with</h3>
         {displayTagsWithBadges(

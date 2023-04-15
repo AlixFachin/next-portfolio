@@ -34,16 +34,17 @@ const Post: NextPage<PostData> = (postData) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StdLayout>
-        <article className="flex flex-col ">
-          <header className="bg-white/80 p-4 rounded-md shadow-lg flex flex-col">
-            <h1 className="text-3xl md:text-5xl font-serif mb-4 py-4 px-2 rounded-lg text-orange-300">
-              {postData.title}{" "}
-            </h1>
-            <div className="self-end p-2 flex justify-start text-sm sm:ml-8">
+        <section className="flex flex-col bg-white/90 py-4 px-2">
+          <header className="flex flex-col border-b-2 border-orange-300 pb-2">
+            <div className="flex items-center">
+              <h1 className="text-xl md:text-7xl font-serif py-4 px-2 rounded-lg text-orange-300">
+                {postData.title}
+              </h1>
+              <div className="flex-grow"></div>
               {postData.tags.map((tag, index) => (
                 <Link href={`/tags/${tag}`} key={index}>
                   <div
-                    className="py-1 px-4 mr-3 bg-orange-400 rounded-full text-black"
+                    className="py-1 px-4 mr-3 bg-orange-400/60 rounded-md text-sm text-black"
                     role="button"
                   >
                     {tag}
@@ -51,12 +52,14 @@ const Post: NextPage<PostData> = (postData) => {
                 </Link>
               ))}
             </div>
-            <div>{dayjs(postData.date).format("MMM-DD-YYYY")}</div>
+            <div className="ml-8 text-sm">
+              {dayjs(postData.date).format("MMM-DD-YYYY")}
+            </div>
           </header>
-          <section className="mt-8 p-8 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg ">
+          <article className="p-8 backdrop-blur-sm rounded-lg shadow-lg ">
             <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
-          </section>
-        </article>
+          </article>
+        </section>
       </StdLayout>
     </>
   );

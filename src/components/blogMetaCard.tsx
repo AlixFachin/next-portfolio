@@ -8,30 +8,23 @@ type BlogMetaCardProps = {
 
 const BlogMetaCard: React.FC<BlogMetaCardProps> = ({ postData }) => {
   return (
-    <div className="mb-3 p-3 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg flex flex-col justify-start">
-      <h2 className="text-orange-200/80  hover:text-orange-200 text-2xl mb-3 w-full align-middle">
-        <Link href={`/posts/${postData.id}`}>{postData.title}</Link>
-      </h2>
-      <div className="flex flex-row items-center">
-        <div className="">{dayjs(postData.date).format("DD-MMM-YY")}</div>
-        <div className="flex-grow">
-          {
-            // spacer
-          }
-        </div>
-        <div className="self-end p-2 flex justify-around text-sm">
-          {postData.tags.map((tag: string) => (
-            <Link href={`/tags/${tag}`} key={tag}>
-              <div className="tag">{tag}</div>
-            </Link>
-          ))}
-        </div>
+    <div className="p-3 flex flex-col justify-start border-b-orange-400 border-b-2">
+      <div className="flex items-center">
+        <h2 className="text-orange-200/80  hover:text-orange-200 text-3xl align-middle mt-2 mb-2">
+          <Link href={`/posts/${postData.id}`}>{postData.title}</Link>
+        </h2>
+        <div className="flex-grow"></div>
+        <div>{dayjs(postData.date).format("MMM-YY")}</div>
       </div>
-      {postData.description ? (
-        <div className="bg-white py-4 px-2">{postData.description}</div>
-      ) : (
-        ""
-      )}
+      <div className="flex flex-row items-center ml-8">
+        {postData.tags.map((tag: string) => (
+          <Link href={`/tags/${tag}`} key={tag}>
+            <div className="bg-orange-400/30 mr-4 text-xs px-2 rounded-sm">
+              {tag}
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

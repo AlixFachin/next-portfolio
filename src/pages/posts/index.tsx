@@ -1,10 +1,6 @@
-import Link from "next/link";
 import { GetStaticProps, NextPage } from "next";
 import { getSortedPostsData, getAllTagsList } from "@/lib/posts";
-import { getGHDirContent } from "@/lib/github";
-import FadeIn from "@/components/fadein";
 import StdLayout from "@/components/stdlayout";
-import dayjs from "dayjs";
 import Head from "next/head";
 import BlogMetaCard from "@/components/blogMetaCard";
 
@@ -42,7 +38,7 @@ const AllPosts: NextPage<BlogRollParams> = ({ allPostsData }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StdLayout>
-        <main className="container max-w-3xl mx-auto px-4 py-12 bg-white/25 backdrop-blur-sm rounded-t-lg">
+        <main className="container max-w-3xl mx-auto px-4 py-12 bg-white/90 rounded-t-lg">
           <h1 className="text-5xl font-title mb-4 py-4 px-2 rounded-lg text-orange-300">
             All Blog Posts
           </h1>

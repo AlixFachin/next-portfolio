@@ -6,20 +6,24 @@ article h1 {
     @apply font-title text-5xl text-orange-200 mb-4 font-bold tracking-tighter;
 }
 
-section h2 {
-    @apply font-headers text-4xl text-orange-200 mb-2 mt-4;
+article h2 {
+    @apply font-headers text-3xl text-orange-200 mb-2 mt-8;
 }
 
-section h3 {
+article h3 {
     @apply font-headers text-xl text-orange-200 mb-2 mt-4;
 }
 
-section ul {
-    @apply list-disc ml-4;
+article p {
+    @apply mb-4
+}
+
+article ul {
+    @apply list-disc ml-4 mb-4;
 }
 
 
-section .highlight {
+article .highlight {
     @apply my-2;
 }
 

@@ -44,16 +44,18 @@ const TagPage: NextPage<TagPageProps> = ({ tag, postDataList }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StdLayout>
-        <h1 className="text-5xl font-serif mb-6 p-4 rounded-sm">
-          Posts with the {tag} tag
-        </h1>
-        <div>
-          {postDataList.map((postData, index) => (
-            <BlogMetaCard
-              postData={postData}
-              key={`post-${postData.id}-${index}`}
-            />
-          ))}
+        <div className="flex flex-col bg-white/90 rounded-md px-4 py-12">
+          <h1 className="text-5xl font-serif mb-6 p-4 rounded-sm text-orange-300">
+            Posts with the {tag} tag
+          </h1>
+          <div>
+            {postDataList.map((postData, index) => (
+              <BlogMetaCard
+                postData={postData}
+                key={`post-${postData.id}-${index}`}
+              />
+            ))}
+          </div>
         </div>
       </StdLayout>
     </>

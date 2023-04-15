@@ -71,12 +71,12 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
             </h1>
           </FadeIn>
           <div className="flex flex-col max-h-[calc(100vh-13rem)] h-full">
-            <h2 className="text-2xl font-serif mb-2">About this site</h2>
-            <div
+            <article
               className="mb-3 p-3 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg
-                flex flex-col justify-start
-                max-w-3xl"
+              flex flex-col justify-start
+              max-w-3xl"
             >
+              <h2 className="text-2xl font-serif mb-2">About this site</h2>
               <p>
                 Like a lot of coders, I solved issues and made progress thanks
                 to countless people who wrote some blog posts and articles
@@ -92,7 +92,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
                 (mostly?) use pastry-related terms for examples instead of{" "}
                 <code>foo</code> and <code>bar</code>!
               </p>
-            </div>
+            </article>
             <div className="flex-grow"></div>
             <div
               className="invisible md:visible self-center text-3xl text-orange-300 mt-8 max-w-[100px] w-[50px]
@@ -102,7 +102,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
             </div>
           </div>
         </section>
-        <div className="sticky top-0 left-0 -z-10 w-full ">
+        <div className="absolute top-[100vh] left-0 -z-10 w-full ">
           <svg
             width="100%"
             height="100%"
@@ -144,7 +144,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
           </svg>
         </div>
 
-        <FeaturedPosts postsData={featuredPostsData} />
+        <FeaturedPosts postsData={featuredPostsData} extraClass="h-[100vh]" />
         <BioSummary />
       </main>
       <Footer />

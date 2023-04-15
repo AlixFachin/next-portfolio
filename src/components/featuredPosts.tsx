@@ -28,7 +28,7 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
     <section
       className={
         extraClass +
-        " flex flex-col backdrop-blur-md max-w-3xl mb-8 w-full py-8 px-10 bg-white/30"
+        " flex flex-col backdrop-blur-md max-w-3xl mb-8 w-full py-8 px-10 bg-white/80"
       }
     >
       {/* 'All tags' and 'All Posts' buttons */}
@@ -55,30 +55,25 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
         <div className="flex-grow"></div>
       </div>
       {/* Aligning the boxes displaying post summaries */}
-      <div className="flex flex-col flex-wrap items-center justify-evenly w-full">
-        {postsData.map((post, index) => (
+      <div className="flex flex-col items-start justify-evenly w-full">
+        {postsData.map((post) => (
           <div
             key={post.id}
-            className={` w-full sm:w-[550px] h-[260px] bg-white
-                flex flex-col mr-4 mb-4 p-4 border-solid border-8 border-orange-300/50
-                rounded-lg shadow-lg ${
-                  index % 2 === 0 ? "sm:self-start" : "sm:self-end"
-                }`}
+            className="w-full flex flex-col mr-4 p-4 border-solid border-b-2 border-orange-300/50"
           >
-            <Link href={`/posts/${post.id}`}>
-              <h3 className="sm:text-2xl text-orange-200">{post.title}</h3>
-            </Link>
-            <div className="self-end p-2 flex justify-around text-sm mb-2">
+            <div className="flex w-full items-baseline">
+              <Link href={`/posts/${post.id}`}>
+                <h3 className="sm:text-2xl text-orange-200">{post.title}</h3>
+              </Link>
+              <div className="flex-grow"></div>
               {post.tags.map((tag: string) => (
-                <Link href={`/tags/${tag}`} key={tag}>
-                  <div className="tag">{tag}</div>
+                <Link href={`/tags/${tag}`} key={tag} className="mr-4 text-xs">
+                  <div className="bg-orange-400/40 px-2 rounded-sm">{tag}</div>
                 </Link>
               ))}
             </div>
 
-            <div className="bg-orange-300/5 rounded-md shadow-sm flex-grow p-4 ">
-              {post.description}{" "}
-            </div>
+            <div className="p-4 indent-4">{post.description} </div>
           </div>
         ))}
       </div>
