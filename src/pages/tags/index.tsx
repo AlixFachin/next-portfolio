@@ -16,9 +16,11 @@ const TagList: NextPage<TagListProps> = ({ tagList }) => {
   if (!tagList) {
     return (
       <StdLayout>
-        <h1 className="text-4xl text-orange-200 bg-white/75 rounded-md p-4">
-          Tag Cloud
-        </h1>
+        <main className="container max-w-3xl mx-auto px-4 py-12 bg-white/90 rounded-t-lg">
+          <h1 className="text-5xl font-title mb-4 py-4 px-2 rounded-lg text-orange-300">
+            Tag Cloud (WIP)
+          </h1>
+        </main>
         <div>No tags found!</div>
       </StdLayout>
     );
@@ -26,16 +28,18 @@ const TagList: NextPage<TagListProps> = ({ tagList }) => {
 
   return (
     <StdLayout>
-      <h1 className="text-3xl md:text-5xl font-serif mb-4 py-4 px-2 rounded-lg bg-gradient-to-br from-orange-300 to-orange-400">
-        Tag Cloud (WIP)
-      </h1>
-      <div className="bg-white/60 rounded-md flex flex-col p-4">
-        {tagList.map((tagData) => (
-          <div key={tagData.tag} className="tag max-w-min mb-2">
-            <Link href={`/tags/${tagData.tag}`}>{tagData.tag}</Link>
-          </div>
-        ))}
-      </div>
+      <main className="container max-w-3xl mx-auto px-4 py-12 bg-white/90 rounded-t-lg">
+        <h1 className="text-5xl font-title mb-4 py-4 px-2 rounded-lg text-orange-300">
+          Tag Cloud (WIP)
+        </h1>
+        <section className="bg-white/60 rounded-md flex flex-col p-4">
+          {tagList.map((tagData) => (
+            <div key={tagData.tag} className="tag max-w-min mb-2">
+              <Link href={`/tags/${tagData.tag}`}>{tagData.tag}</Link>
+            </div>
+          ))}
+        </section>
+      </main>
     </StdLayout>
   );
 };

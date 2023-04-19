@@ -12,11 +12,14 @@ module.exports = {
             400: '#fcb900',
         },
         'black': '#000000',
+        'darkgrey': {
+            200: '#444444',
+            300: '#666666' },
+        'grey': '#00000010',
         'jet': '#363537',
         'white': '#FFFFFF',
         'yellow': '#f4C717',
         'green': '#33CA7F',
-        'grey': '#00000010',
         'red': '#Ef2D56',
         'purple': '#5F4BB6',
         'blue': {

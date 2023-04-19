@@ -98,7 +98,7 @@ export async function getFeaturedPostsData(
       (postMetaData) =>
         postMetaData.draft === undefined || postMetaData.draft === false
     )
-    .slice(0, 3);
+    .slice(0, 5);
 }
 
 type PostId = {

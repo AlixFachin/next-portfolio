@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    @apply text-darkgrey-300
+}
+
 article h1 {
     @apply font-title text-5xl text-orange-200 mb-4 font-bold tracking-tighter;
 }
@@ -12,6 +16,10 @@ article h2 {
 
 article h3 {
     @apply font-headers text-xl text-orange-200 mb-2 mt-4;
+}
+
+article {
+    @apply leading-relaxed
 }
 
 article p {
