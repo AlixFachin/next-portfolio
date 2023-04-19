@@ -79,11 +79,11 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
                 </li>
                 <li>
                   Speaks French, English, Japanese. Studied German{" "}
-                  <span>aber ich habe alles vergessen!</span>
+                  <span className="italic">aber ich habe alles vergessen!</span>
                 </li>
                 <li>
-                  The first game I played was "New Zealand Story" from Taito, on
-                  an Amiga 500
+                  The first game I played was &quot;New Zealand Story&quot; from
+                  Taito, on an Amiga 500
                 </li>
                 <li>
                   The first time I coded seriously was on my scientific
