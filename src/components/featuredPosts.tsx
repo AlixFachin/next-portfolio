@@ -28,12 +28,12 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
     <section
       className={
         extraClass +
-        " flex flex-col backdrop-blur-md max-w-3xl mb-8 w-full py-8 px-10 bg-white/80"
+        " flex flex-col backdrop-blur-md max-w-3xl mb-8 w-full py-8 px-10 bg-white/90"
       }
     >
       {/* 'All tags' and 'All Posts' buttons */}
       <div className="flex items-center flex-wrap mb-4">
-        <h2 className="text-3xl md:text-5xl font-title text-orange-200  md:pl-8 mb-6 md:mr-10">
+        <h2 className="text-3xl md:text-5xl font-title text-orange-300  md:pl-8 md:mr-10">
           Featured Posts
         </h2>
         <Link href="/posts" aria-label="all posts page">
@@ -73,7 +73,7 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
               ))}
             </div>
 
-            <div className="p-4 indent-4">{post.description} </div>
+            <div className="pt-2 pb-2 indent-4">{post.description} </div>
           </div>
         ))}
       </div>

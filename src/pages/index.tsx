@@ -64,10 +64,10 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
           ></div>
           <FadeIn direction="from-left">
             <h1
-              className=" text-4xl md:text-6xl pl-8 font-headers font-bold bg-clip-text text-transparent
+              className=" text-4xl md:text-6xl pl-8 max-w-3xl -indent-8 font-headers font-bold bg-clip-text text-transparent
            bg-gradient-to-tl from-orange-300 to-orange-400"
             >
-              Welcome to Code & Pastries
+              Welcome to Code & Pastries!
             </h1>
           </FadeIn>
           <div className="flex flex-col max-h-[calc(100vh-13rem)] h-full">
@@ -98,7 +98,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
               className="invisible md:visible self-center text-3xl text-orange-300 mt-8 max-w-[100px] w-[50px]
                 motion-safe:animate-bounce"
             >
-              <FontAwesomeIcon icon={faArrowDown} beat />
+              <FontAwesomeIcon icon={faArrowDown} />
             </div>
           </div>
         </section>

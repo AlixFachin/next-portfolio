@@ -56,10 +56,10 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
         <Link href="/about">About me</Link>
       </h2>
 
-      <article className="bio-container bg-white/50">
+      <article className="bio-container bg-white/50 py-4">
         <FadeIn direction="from-left" delay={200}>
           <div className="bio-text">
-            <p>Hi there!</p>
+            <h3>Hi there!</h3>
             <p>
               I am <span>Alix Fachin</span>, software developer working for{" "}
               <a href="https://roomboss.com">RoomBoss</a>, a software company
@@ -72,7 +72,7 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
               development again!
             </p>
             <h3>Trivia Facts</h3>
-            <p>
+            <div>
               <ul className="indent-4">
                 <li>
                   Born in France, lived abroad since I graduated from college
@@ -95,11 +95,11 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
                 </li>
                 <li>My favourite game ever was The Last of Us II on PS4</li>
               </ul>
-            </p>
+            </div>
           </div>
         </FadeIn>
       </article>
-      <div className="skillSetList bg-white/50">
+      <div className="skillSetList bg-white/50 py-2">
         <h3>Experienced with</h3>
         {displayTagsWithBadges(
           "JavaScript, React.js, Angular, Riot.js, Node.js, Sequelize, Python, Django, Git, Rust, Docker, GraphQL"
