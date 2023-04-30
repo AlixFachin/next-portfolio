@@ -16,7 +16,7 @@ import {
   getGHFileContentFromPath,
 } from "./github";
 
-const PostMetaData = z.object({
+export const PostMetaData = z.object({
   id: z.string(),
   title: z.string(),
   date: z.string().datetime(),

@@ -1,13 +1,31 @@
-import { initializeApp } from "firebase/app";
+import { PostData } from "./posts";
 
-const firebaseConfig = {
-  apiKey: process.env.FB_APIKEY,
-  authDomain: process.env.FB_AUTHDOMAIN,
-  projectId: process.env.FB_PROJECTID,
-  storageBucket: process.env.STORAGEBUCKET,
-  messagingSenderId: process.env.MESSAGINGID,
-  appId: process.env.APPID,
-  measurementId: process.env.MEASUREMENTID,
-};
+import { FirebaseApp } from "firebase/app";
+import { Auth, signOut } from "firebase/auth";
+import { getFirestore, getDocs, collection } from "firebase/firestore";
 
-const app = initializeApp(firebaseConfig);
+export function fb_logOut(firebaseAuth: Auth): void {
+  signOut(firebaseAuth).catch((error) => console.error(error));
+}
+
+export async function fb_getAllPosts(
+  firebaseApp: FirebaseApp
+): Promise<PostData[]> {
+  const db = getFirestore(firebaseApp);
+  const querySnapshot = await getDocs(collection(db, "posts"));
+
+  const postArray: PostData[] = [];
+  querySnapshot.forEach((doc) => {
+    postArray.push({
+      draft: false,
+      id: "",
+      date: "2023/12/01",
+      tags: [],
+      description: "",
+      title: doc.data().title,
+      contentHtml: "",
+    });
+  });
+
+  return postArray;
+}
