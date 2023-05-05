@@ -16,19 +16,35 @@ import {
   getGHFileContentFromPath,
 } from "./github";
 
-export const PostMetaData = z.object({
+export const PostMetaData_z = z.object({
   id: z.string(),
   title: z.string(),
-  date: z.string().datetime(),
-  draft: z.boolean().optional(),
+  slug: z.string(),
+  locale: z.enum(["en", "ja"]),
+  published: z.string().datetime(),
+  isDraft: z.boolean().optional(),
   tags: z.array(z.string()),
   featuredImageURL: z.string().optional(),
   imageLegend: z.string().optional(),
   description: z.string(),
 });
+const PostContent = z.object({ contentHtml: z.string() });
 
-export type PostMetaData = z.infer<typeof PostMetaData>;
-export type PostData = PostMetaData & { contentHtml: string };
+export const PostData_z = PostMetaData_z.merge(PostContent);
+
+export type PostMetaData = z.infer<typeof PostMetaData_z>;
+export type PostData = z.infer<typeof PostData_z>;
+
+export async function markdownToHtml(mdContent: string): Promise<string> {
+  const processedContent = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeHighlight)
+    .use(rehypeStringify)
+    .process(mdContent);
+
+  return processedContent.toString();
+}
 
 export async function getSortedPostsData(
   language: string
@@ -47,10 +63,10 @@ export async function getSortedPostsData(
       const fileContents = await getGHFileContentFromPath(fileData.path);
 
       const matterResult = matter(fileContents);
-      const postMetaData = PostMetaData.parse({
+      const postMetaData = PostMetaData_z.parse({
         id,
         ...matterResult.data,
-        date: dayjs(matterResult.data.date).toISOString(),
+        publishedDate: dayjs(matterResult.data.publishedDate).toISOString(),
       });
 
       return postMetaData;
@@ -59,11 +75,11 @@ export async function getSortedPostsData(
 
   return allPostsData
     .filter(
-      (metaData) => metaData.draft === undefined || metaData.draft === false
+      (metaData) => metaData.isDraft === undefined || metaData.isDraft === false
     )
     .sort((metaData1, metaData2) =>
       // We want to sort in descending order, so we compare date2 with date1
-      dayjs(metaData2.date).diff(metaData1.date, "date")
+      dayjs(metaData2.published).diff(metaData1.published, "date")
     );
 }
 
@@ -84,10 +100,10 @@ export async function getFeaturedPostsData(
       const fileContents = await getGHFileContentFromPath(fileData.path);
 
       const matterResult = matter(fileContents);
-      const postMetaData = PostMetaData.parse({
+      const postMetaData = PostMetaData_z.parse({
         id,
         ...matterResult.data,
-        date: dayjs(matterResult.data.date).toISOString(),
+        publishedDate: dayjs(matterResult.data.publishedDate).toISOString(),
       });
       return postMetaData;
     })
@@ -96,7 +112,7 @@ export async function getFeaturedPostsData(
   return allPostsData
     .filter(
       (postMetaData) =>
-        postMetaData.draft === undefined || postMetaData.draft === false
+        postMetaData.isDraft === undefined || postMetaData.isDraft === false
     )
     .slice(0, 5);
 }
@@ -132,10 +148,10 @@ export async function getPostData(
   const fileContents = await getGHFileContentFromId("posts", language, id);
 
   const matterResult = matter(fileContents);
-  const postMetaData = PostMetaData.parse({
+  const postMetaData = PostMetaData_z.parse({
     id,
     ...matterResult.data,
-    date: dayjs(matterResult.data.date).toISOString(),
+    publishedDate: dayjs(matterResult.data.publishedDate).toISOString(),
   });
 
   // Extract markdown content
@@ -199,16 +215,16 @@ export async function getPostsMetaDataForTag(language: string, tag: string) {
     filesData.map(async (fileData) => {
       const fileContents = await getGHFileContentFromPath(fileData.path);
       const matterResult = matter(fileContents);
-      const postMetaData = PostMetaData.parse({
+      const postMetaData = PostMetaData_z.parse({
         id: fileData.name.replace(/\.md$/, ""),
         ...matterResult.data,
-        date: dayjs(matterResult.data.date).toISOString(),
+        publishedDate: dayjs(matterResult.data.publishedDate).toISOString(),
       });
       return postMetaData;
     })
   );
 
   return filesMetaData.filter(
-    (metaData) => !metaData.draft && metaData.tags.includes(tag)
+    (metaData) => !metaData.isDraft && metaData.tags.includes(tag)
   );
 }

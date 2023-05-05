@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import AdminPostList from "@/components/CRM/admin";
 import AdminLayout from "@/components/adminLayout";
+import AdminPostList from "@/components/CRM/adminPostList";
 
 const Admin: NextPage = () => {
   return (

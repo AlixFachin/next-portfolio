@@ -1,7 +1,8 @@
-import { PostData } from "@/lib/posts";
+import { PostMetaData } from "@/lib/posts";
+import Link from "next/link";
 
 type EditablePostListProps = {
-  postList: PostData[];
+  postList: PostMetaData[];
 };
 
 const EditablePostList: React.FC<EditablePostListProps> = ({ postList }) => {
@@ -10,9 +11,23 @@ const EditablePostList: React.FC<EditablePostListProps> = ({ postList }) => {
   }
 
   return (
-    <div className="flex flex-col align-center">
+    <div className="flex flex-col align-center bg-white py-4">
       {postList.map((postData) => (
-        <div>{postData.title}</div>
+        <div
+          className="border-y-2 border-blue-200 py-4 px-2 flex"
+          key={postData.id}
+        >
+          <div className="text-orange-300 font-title"> {postData.title}</div>
+          <div className="flex-grow"></div>
+          <Link href={`admin/edit/${postData.id}`}>
+            <div
+              className="bg-blue-400 text-white rounded-md py-2 px-4"
+              role="button"
+            >
+              Edit
+            </div>
+          </Link>
+        </div>
       ))}
     </div>
   );

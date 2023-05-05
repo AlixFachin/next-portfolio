@@ -6,16 +6,16 @@ import { FirebaseUserContext } from "@/contexts/fbUserProvider";
 import LoginScreen from "./login";
 import EditablePostList from "./EditablePostList";
 
-import { PostData } from "@/lib/posts";
-import { fb_getAllPosts } from "@/lib/firebase";
+import { PostMetaData } from "@/lib/posts";
+import { fb_getAllPostsIdList } from "@/lib/firebase";
 
 const AdminPostList = () => {
   const user = useContext(FirebaseUserContext);
   const firebaseApp = useContext(FirebaseAppContext);
-  const [postList, setPostList] = useState<PostData[]>([]);
+  const [postList, setPostList] = useState<PostMetaData[]>([]);
 
   useEffect(() => {
-    fb_getAllPosts(firebaseApp).then((postList) => {
+    fb_getAllPostsIdList(firebaseApp).then((postList) => {
       setPostList(postList);
     });
   }, []);
