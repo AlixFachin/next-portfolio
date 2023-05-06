@@ -1,4 +1,4 @@
-import { getAllPostsIds, getPostData } from "@/lib/posts";
+import { getAllPostsIds, getPostData, markdownToHtml } from "@/lib/posts";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { getGHDirContent } from "@/lib/github";
 
@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import Head from "next/head";
 
-const Post: NextPage<PostData> = (postData) => {
+const Post: NextPage<PostData & { contentHtml: string }> = (postData) => {
   return (
     <>
       <Head>
@@ -53,7 +53,7 @@ const Post: NextPage<PostData> = (postData) => {
               ))}
             </div>
             <div className="ml-8 text-sm">
-              {dayjs(postData.date).format("MMM-DD-YYYY")}
+              {dayjs(postData.published).format("MMM-DD-YYYY")}
             </div>
           </header>
           <article className="p-8 backdrop-blur-sm rounded-lg shadow-lg ">
@@ -81,9 +81,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
   const postData = await getPostData("en", params.id as string);
+
+  const contentHtml = await (async () => {
+    if (postData?.content) {
+      return markdownToHtml(postData?.content);
+    }
+    return Promise.resolve("");
+  })();
   return {
     props: {
       ...postData,
+      contentHtml: contentHtml,
     },
   };
 };

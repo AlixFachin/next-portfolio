@@ -1,5 +1,5 @@
-import { useForm } from "react-hook-form";
-import { fb_getPostById } from "@/lib/firebase";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { fb_getPostById, fb_savePost } from "@/lib/firebase";
 import { useState, useEffect, useContext } from "react";
 import { PostData, PostData_z } from "@/lib/posts";
 import { FirebaseAppContext } from "@/contexts/fbAppProvider";
@@ -10,30 +10,52 @@ type EditPostProps = {
   postId: string;
 };
 
+type FormData = Omit<PostData, "tags"> & { tagString: string };
+
 const EditPost: React.FC<EditPostProps> = ({ postId }) => {
   const firebaseApp = useContext(FirebaseAppContext);
   const router = useRouter();
 
   //   const postData = await fb_getPostById(postId);
-  const [postData, setPostData] = useState<PostData | null>(null);
+  const [postData, setPostData] = useState<FormData | null>(null);
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
     values: postData || undefined,
-    resolver: zodResolver(PostData_z),
-    mode: "onChange",
+    // resolver: zodResolver(PostData_z),
+    mode: "onBlur",
   });
-  const onSubmit = handleSubmit((data) => console.log(data));
 
   useEffect(() => {
     fb_getPostById(firebaseApp, postId).then((returnPostData) => {
       if (returnPostData) {
-        setPostData(returnPostData);
+        setPostData({
+          ...returnPostData,
+          tagString: returnPostData.tags.join(","),
+        });
       }
     });
   }, []);
+
+  const formSubmitHandler: SubmitHandler<FormData> = async (data) => {
+    console.log(`Trying to save the data`);
+    console.log(data);
+
+    // fancy way to remove the 'tagString' property from the fbData sent to Firebase
+    const { tagString: _, ...fbData } = {
+      ...data,
+      tags: data.tagString.split(",").map((x) => x.trim()),
+    };
+
+    try {
+      await fb_savePost(firebaseApp, fbData);
+    } catch (e) {
+      console.error(`Error in the saving of the form`, e);
+    }
+  };
 
   if (!postData) {
     return <div>Loading...</div>;
@@ -41,7 +63,7 @@ const EditPost: React.FC<EditPostProps> = ({ postId }) => {
 
   return (
     <div className="max-w-full bg-white flex flex-col py-8 px-4">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(formSubmitHandler)}>
         {/* Meta Data sub-form */}
         <div className="border-blue-200 border-2 mb-2 p-4">
           <div className="flex flex-col mb-2">
@@ -86,11 +108,14 @@ const EditPost: React.FC<EditPostProps> = ({ postId }) => {
             />
           </div>
           <div className="flex flex-col mb-2">
-            <label htmlFor="tags">Tags</label>
+            <label htmlFor="tagString">Tags</label>
             <input
               className="border py-2 px-3 text-darkgrey-200"
-              {...register("tags")}
+              {...register("tagString")}
             />
+            <div className="text-red border-red">
+              {errors && <p> {`${errors.tagString?.message}`} </p>}
+            </div>
           </div>
           <div className="flex flex-col mb-2">
             <label htmlFor="description">Description</label>
@@ -106,8 +131,8 @@ const EditPost: React.FC<EditPostProps> = ({ postId }) => {
             <label htmlFor="content">Content</label>
             <textarea
               className="border py-2 px-3 text-darkgrey-200"
-              rows={5}
-              {...register("contentHtml")}
+              rows={2}
+              {...register("content")}
             />
           </div>
         </div>
