@@ -16,8 +16,8 @@ const TagList: NextPage<TagListProps> = ({ tagList }) => {
   if (!tagList) {
     return (
       <StdLayout>
-        <main className="container max-w-3xl mx-auto px-4 py-12 bg-white/90 rounded-t-lg">
-          <h1 className="text-5xl font-title mb-4 py-4 px-2 rounded-lg text-orange-300">
+        <main className="container mx-auto max-w-3xl rounded-t-lg bg-white/90 px-4 py-12">
+          <h1 className="mb-4 rounded-lg py-4 px-2 font-title text-5xl text-orange-300">
             Tag Cloud (WIP)
           </h1>
         </main>
@@ -28,13 +28,13 @@ const TagList: NextPage<TagListProps> = ({ tagList }) => {
 
   return (
     <StdLayout>
-      <main className="container max-w-3xl mx-auto px-4 py-12 bg-white/90 rounded-t-lg">
-        <h1 className="text-5xl font-title mb-4 py-4 px-2 rounded-lg text-orange-300">
+      <main className="container mx-auto max-w-3xl rounded-t-lg bg-white/90 px-4 py-12">
+        <h1 className="mb-4 rounded-lg py-4 px-2 font-title text-5xl text-orange-300">
           Tag Cloud (WIP)
         </h1>
-        <section className="bg-white/60 rounded-md flex flex-col p-4">
+        <section className="flex flex-col rounded-md bg-white/60 p-4">
           {tagList.map((tagData) => (
-            <div key={tagData.tag} className="tag max-w-min mb-2">
+            <div key={tagData.tag} className="tag mb-2 max-w-min">
               <Link href={`/tags/${tagData.tag}`}>{tagData.tag}</Link>
             </div>
           ))}

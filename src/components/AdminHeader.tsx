@@ -36,7 +36,7 @@ const AdminHeader = () => {
           id="svg"
           viewBox="0 0 1440 600"
           xmlns="http://www.w3.org/2000/svg"
-          className="transition duration-300 ease-in-out delay-150"
+          className="transition delay-150 duration-300 ease-in-out"
         >
           <defs>
             <linearGradient id="gradient" x1="0%" y1="50%" x2="100%" y2="50%">
@@ -50,7 +50,7 @@ const AdminHeader = () => {
             strokeWidth="0"
             fill="url(#gradient)"
             fillOpacity="0.53"
-            className="transition-all duration-300 ease-in-out delay-150 path-0"
+            className="path-0 transition-all delay-150 duration-300 ease-in-out"
             transform="rotate(-180 720 300)"
           ></path>
           <defs>
@@ -65,7 +65,7 @@ const AdminHeader = () => {
             strokeWidth="0"
             fill="url(#gradient)"
             fillOpacity="1"
-            className="transition-all duration-300 ease-in-out delay-150 path-1"
+            className="path-1 transition-all delay-150 duration-300 ease-in-out"
             transform="rotate(-180 720 300)"
           ></path>
         </svg>
@@ -73,15 +73,18 @@ const AdminHeader = () => {
       {
         // Navbar header
       }
-      <div className="fixed top-0 left-0 w-screen h-12 bg-gradient-to-r from-blue-300 to-blue-200  flex justify-start items-center px-4 z-10">
+      <div className="fixed top-0 left-0 z-10 flex h-12 w-screen items-center  justify-start bg-gradient-to-r from-blue-300 to-blue-200 px-4">
         {navLinks.map((navItem) => (
-          <div key={navItem.id} className="min-w-fit mr-8 hover:text-lg">
+          <div key={navItem.id} className="mr-8 min-w-fit hover:text-lg">
             <Link href={navItem.href}>{navItem.label}</Link>
           </div>
         ))}
         <div className="flex-grow"></div>
+        <div className="mr-4 rounded-md bg-white/30 px-2 ">
+          {firebaseAuth.currentUser?.displayName}
+        </div>
         <div
-          className="min-w-fit mr-8 hover:text-lg"
+          className="mr-8 min-w-fit hover:text-lg"
           role="button"
           onClick={() => fb_logOut(firebaseAuth)}
         >

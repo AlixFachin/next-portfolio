@@ -14,8 +14,14 @@ const AdminPostList = () => {
   const firebaseApp = useContext(FirebaseAppContext);
   const [postList, setPostList] = useState<PostMetaData[]>([]);
 
+  const refreshList = () => {
+    fb_getAllPostsMetaDataList(firebaseApp, true).then((postList) => {
+      setPostList(postList);
+    });
+  };
+
   useEffect(() => {
-    fb_getAllPostsMetaDataList(firebaseApp).then((postList) => {
+    fb_getAllPostsMetaDataList(firebaseApp, true).then((postList) => {
       setPostList(postList);
     });
   }, []);
@@ -34,9 +40,11 @@ const AdminPostList = () => {
   }
 
   return (
-    <div>
-      <p>{user.displayName}</p>
-      <EditablePostList postList={postList} />
+    <div className="flex flex-col">
+      <div className="bg-orange-300" role="button" onClick={refreshList}>
+        Refresh
+      </div>
+      <EditablePostList postList={postList} refreshList={refreshList} />
     </div>
   );
 };

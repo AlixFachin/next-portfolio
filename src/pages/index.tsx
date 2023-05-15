@@ -55,8 +55,8 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
       />
       <main className="flex flex-col items-center">
         <section
-          className="container w-[100vw] h-[100vh] mx-auto px-4 py-12 
-        bg-white/50 backdrop-blur-sm rounded-t-lg"
+          className="container mx-auto h-[100vh] w-[100vw] rounded-t-lg bg-white/50 
+        px-4 py-12 backdrop-blur-sm"
         >
           <div
             id="particles-js"
@@ -64,19 +64,19 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
           ></div>
           <FadeIn direction="from-left">
             <h1
-              className=" text-4xl md:text-6xl pl-8 max-w-3xl -indent-8 font-headers font-bold bg-clip-text text-transparent
-           bg-gradient-to-tl from-orange-300 to-orange-400"
+              className=" max-w-3xl bg-gradient-to-tl from-orange-300 to-orange-400 bg-clip-text pl-8 -indent-8 font-headers text-4xl
+           font-bold text-transparent md:text-6xl"
             >
               Welcome to Code & Pastries!
             </h1>
           </FadeIn>
-          <div className="flex flex-col max-h-[calc(100vh-13rem)] h-full">
+          <div className="flex h-full max-h-[calc(100vh-13rem)] flex-col">
             <article
-              className="mb-3 p-3 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg
-              flex flex-col justify-start
-              max-w-3xl"
+              className="mb-3 flex max-w-3xl flex-col justify-start rounded-lg
+              bg-white/80 p-3 shadow-lg
+              backdrop-blur-sm"
             >
-              <h2 className="text-2xl font-serif mb-2">About this site</h2>
+              <h2 className="font-serif mb-2 text-2xl">About this site</h2>
               <p>
                 Like a lot of coders, I solved issues and made progress thanks
                 to countless people who wrote some blog posts and articles
@@ -95,8 +95,8 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
             </article>
             <div className="flex-grow"></div>
             <div
-              className="invisible md:visible self-center text-3xl text-orange-300 mt-8 max-w-[100px] w-[50px]
-                motion-safe:animate-bounce"
+              className="invisible mt-8 w-[50px] max-w-[100px] self-center text-3xl text-orange-300 motion-safe:animate-bounce
+                md:visible"
             >
               <FontAwesomeIcon icon={faArrowDown} />
             </div>
@@ -109,7 +109,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
             id="svg"
             viewBox="0 0 1440 600"
             xmlns="http://www.w3.org/2000/svg"
-            className="transition duration-300 ease-in-out delay-150"
+            className="transition delay-150 duration-300 ease-in-out"
           >
             <defs>
               <linearGradient id="gradient" x1="0%" y1="50%" x2="100%" y2="50%">
@@ -123,7 +123,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
               strokeWidth="0"
               fill="url(#gradient)"
               fillOpacity="0.53"
-              className="transition-all duration-300 ease-in-out delay-150 path-0"
+              className="path-0 transition-all delay-150 duration-300 ease-in-out"
               transform="rotate(-180 720 300)"
             ></path>
             <defs>
@@ -138,7 +138,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
               strokeWidth="0"
               fill="url(#gradient)"
               fillOpacity="1"
-              className="transition-all duration-300 ease-in-out delay-150 path-1"
+              className="path-1 transition-all delay-150 duration-300 ease-in-out"
               transform="rotate(-180 720 300)"
             ></path>
           </svg>

@@ -5,7 +5,7 @@ import getPageData, { StaticPageData } from "@/lib/staticPages";
 export default function Custom404(pageData: StaticPageData) {
   return (
     <StdLayout>
-      <h1 className="text-orange-300 font-title text-center text-5xl mb-4">
+      <h1 className="mb-4 text-center font-title text-5xl text-orange-300">
         You seem lost!
       </h1>
       <p className="mb-4">
@@ -17,7 +17,7 @@ export default function Custom404(pageData: StaticPageData) {
       </p>
 
       <article
-        className="mt-8 prose 
+        className="prose mt-8 
             max-w-none 
             prose-headings:text-orange-200
             prose-strong:text-orange-200/90

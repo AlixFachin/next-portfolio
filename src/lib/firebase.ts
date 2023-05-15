@@ -10,6 +10,8 @@ import {
   where,
   QuerySnapshot,
   setDoc,
+  addDoc,
+  deleteDoc,
   Timestamp,
 } from "firebase/firestore";
 import {
@@ -130,11 +132,9 @@ export async function fb_getPostData(
       id: postId,
     });
 
-    const contentHtml = await markdownToHtml(docSnap.data().content);
-
     return {
       ...postMetaData,
-      content: contentHtml,
+      content: docSnap.data().content,
     };
   }
 
@@ -204,4 +204,28 @@ export async function fb_savePost(
     ...postData,
     published: publishedTimeStamp,
   });
+}
+
+export async function fb_addPost(firebaseApp: FirebaseApp): Promise<string> {
+  const db = getFirestore(firebaseApp);
+  const newPostData: Omit<PostData, "id" | "published"> & {
+    published: Timestamp;
+  } = {
+    title: "New Post",
+    published: Timestamp.now(),
+    isDraft: true,
+    slug: "new-post",
+    locale: "en",
+    description: "",
+    tags: [],
+    content: "#Write content here",
+  };
+  const docRef = await addDoc(collection(db, "posts"), newPostData);
+  return docRef.id;
+}
+
+export async function fb_deletePost(firebaseApp: FirebaseApp, postId: string) {
+  const db = getFirestore(firebaseApp);
+
+  await deleteDoc(doc(db, "posts", postId));
 }

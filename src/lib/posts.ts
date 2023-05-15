@@ -29,6 +29,7 @@ export const PostMetaData_z = z.object({
   locale: z.enum(["en", "ja"]),
   published: z.string().datetime(),
   isDraft: z.boolean().optional(),
+  featured: z.boolean().optional(),
   tags: z.array(z.string()),
   featuredImageURL: z.string().optional(),
   imageLegend: z.string().optional(),
@@ -44,9 +45,9 @@ export type PostData = z.infer<typeof PostData_z>;
 export async function markdownToHtml(mdContent: string): Promise<string> {
   const processedContent = await unified()
     .use(remarkParse)
-    .use(rehypeSanitize)
     .use(remarkRehype)
     .use(rehypeHighlight)
+    .use(rehypeSanitize)
     .use(rehypeStringify)
     .process(mdContent);
 

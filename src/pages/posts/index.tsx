@@ -38,8 +38,8 @@ const AllPosts: NextPage<BlogRollParams> = ({ allPostsData }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StdLayout>
-        <main className="container max-w-3xl mx-auto px-4 py-12 bg-white/90 rounded-t-lg">
-          <h1 className="text-5xl font-title mb-4 py-4 px-2 rounded-lg text-orange-300">
+        <main className="container mx-auto max-w-3xl rounded-t-lg bg-white/90 px-4 py-12">
+          <h1 className="mb-4 rounded-lg py-4 px-2 font-title text-5xl text-orange-300">
             All Blog Posts
           </h1>
           <section className="blogRoll">

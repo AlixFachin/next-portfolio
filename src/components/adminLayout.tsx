@@ -13,7 +13,7 @@ const AdminLayout = ({ children }: LayoutProps) => {
       <FirebaseAppProvider>
         <FirebaseUserProvider>
           <AdminHeader />
-          <main className="container min-h-[400px] max-w-3xl mx-auto mt-[10vh] pt-4">
+          <main className="container mx-auto mt-[10vh] flex min-h-[400px] max-w-full flex-col items-center pt-4">
             {children}
           </main>
         </FirebaseUserProvider>

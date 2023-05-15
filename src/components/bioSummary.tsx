@@ -4,10 +4,10 @@ import Link from "next/link";
 function displayTagsWithBadges(tagsString: string) {
   const tagArray = tagsString.split(",");
   return (
-    <div className="grid gap-2 grid-cols-4 md:grid-cols-6 md:py-4">
+    <div className="grid grid-cols-4 gap-2 md:grid-cols-6 md:py-4">
       {tagArray.map((tag, idx) => (
         <div
-          className="bg-orange-400 rounded-lg p-2 mr-2 mb-2 text-sm min-w-[80px] text-center"
+          className="mr-2 mb-2 min-w-[80px] rounded-lg bg-orange-400 p-2 text-center text-sm"
           data-tag={tag.trim()}
           key={idx}
         >
@@ -23,11 +23,11 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
 }) => {
   return (
     <section
-      className={`container max-w-3xl mx-auto px-4 py-12 bg-white/70 backdrop-blur-sm 
-        rounded-t-lg flex flex-col items-center justify-start
+      className={`container mx-auto flex max-w-3xl flex-col items-center justify-start 
+        rounded-t-lg bg-white/70 px-4 py-12 backdrop-blur-sm
         ${extraClass ? " " + extraClass : ""}`}
     >
-      <div className="absolute t-0 -z-30">
+      <div className="t-0 absolute -z-30">
         <svg
           id="visual"
           viewBox="0 0 900 600"
@@ -52,7 +52,7 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
           </g>
         </svg>
       </div>
-      <h2 className="font-title text-orange-300 text-5xl mb-4">
+      <h2 className="mb-4 font-title text-5xl text-orange-300">
         <Link href="/about">About me</Link>
       </h2>
 
@@ -107,7 +107,7 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
       </div>
       <div className="self-end">
         <FadeIn direction="none">
-          <div className="self-end mt-4 bg-orange-300/60 rounded-lg p-2 px-4 text-lg shadow-md">
+          <div className="mt-4 self-end rounded-lg bg-orange-300/60 p-2 px-4 text-lg shadow-md">
             <Link href="/about">More details</Link>
           </div>
         </FadeIn>

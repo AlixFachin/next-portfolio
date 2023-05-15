@@ -8,7 +8,7 @@ const Footer = () => {
 
   return (
     <footer className="relative py-4">
-      <div className="absolute h-full w-full bottom-0 left-0 -z-20 bg-blue-400">
+      <div className="absolute bottom-0 left-0 -z-20 h-full w-full bg-blue-400">
         {/* <svg
           width="100%"
           height="100%"
@@ -42,10 +42,10 @@ const Footer = () => {
           ></path>
         </svg> */}
       </div>
-      <div className="flex flex-col items-center justify-end h-full text-sm pb-2 text-white/90 italic">
-        <div className="flex items-center justify-center mb-3 py-1">
+      <div className="flex h-full flex-col items-center justify-end pb-2 text-sm italic text-white/90">
+        <div className="mb-3 flex items-center justify-center py-1">
           <div className="mr-8"> {copyright} </div>
-          <div className="w-[20px] hover:text-orange-400 mr-5">
+          <div className="mr-5 w-[20px] hover:text-orange-400">
             <a
               href="https://www.linkedin.com/in/alix-fachin/"
               aria-label="My LinkedIn Page"
