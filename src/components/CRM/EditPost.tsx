@@ -1,10 +1,16 @@
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import {
+  useForm,
+  Controller,
+  SubmitHandler,
+  FieldErrors,
+} from "react-hook-form";
 import { fb_getPostById, fb_savePost } from "@/lib/firebase";
 import { useState, useEffect, useContext } from "react";
 import { PostData, PostData_z } from "@/lib/posts";
 import { FirebaseAppContext } from "@/contexts/fbAppProvider";
 import { useRouter } from "next/router";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 import rehypeSanitize from "rehype-sanitize";
 
@@ -20,31 +26,60 @@ type EditPostProps = {
 
 type FormData = Omit<PostData, "tags"> & { tagString: string };
 
+const stringifyFormErrors = (formErrors: FieldErrors<FormData>) => {
+  const potentialErrorsFields = [
+    "id",
+    "title",
+    "slug",
+    "published",
+    "description",
+    "content",
+  ] as const;
+
+  console.log(formErrors);
+
+  return (
+    potentialErrorsFields
+      .map((errorType) => {
+        if (formErrors[errorType]) {
+          return `Error in field ${errorType}`;
+        }
+        return "";
+      })
+      .filter((errorString) => errorString !== "")
+      .join("\n") || ""
+  );
+};
+
 const EditPost: React.FC<EditPostProps> = ({ postId }) => {
   const firebaseApp = useContext(FirebaseAppContext);
   const router = useRouter();
+  const tagProperty_z = z.object({ tagString: z.string() });
+  const FormData_z = PostData_z.omit({ tags: true }).merge(tagProperty_z);
 
-  //   const postData = await fb_getPostById(postId);
+  //   postData will contain initial values, after download from API
   const [postData, setPostData] = useState<FormData | null>(null);
   const {
     register,
     handleSubmit,
     control,
     setValue,
-    formState: { errors },
+    formState: { isValid, errors },
   } = useForm({
     values: postData || undefined,
-    // resolver: zodResolver(PostData_z),
+    resolver: zodResolver(FormData_z),
     mode: "onBlur",
   });
 
   useEffect(() => {
     fb_getPostById(firebaseApp, postId).then((returnPostData) => {
       if (returnPostData) {
-        setPostData({
+        const { tags, ...newPostData } = {
           ...returnPostData,
           tagString: returnPostData.tags.join(","),
-        });
+        };
+        console.log(`Setting post initial values to `, newPostData);
+        setPostData(newPostData);
       }
     });
   }, []);
@@ -130,7 +165,7 @@ const EditPost: React.FC<EditPostProps> = ({ postId }) => {
             {...register("tagString")}
           />
           <div className="border-red text-red">
-            {errors && <p> {`${errors.tagString?.message}`} </p>}
+            {stringifyFormErrors(errors)}
           </div>
           <label htmlFor="description" className="md:col-span-2 lg:col-span-4">
             Description
@@ -172,7 +207,8 @@ const EditPost: React.FC<EditPostProps> = ({ postId }) => {
           </div>
         </div>
         <div className="border-red text-red">
-          {errors && <p> {`${errors.published?.message}`} </p>}
+          <p>{stringifyFormErrors(errors)}</p>
+          <p>{!isValid ? "woops" : "no errors"} </p>
         </div>
 
         <div className="flex justify-evenly p-4">

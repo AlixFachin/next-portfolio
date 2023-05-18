@@ -23,9 +23,11 @@ import {
 } from "./firebase";
 
 export const PostMetaData_z = z.object({
-  id: z.string(),
-  title: z.string(),
-  slug: z.string(),
+  id: z
+    .string({ required_error: "Post ID is necessary!" })
+    .min(1, "String must be non empty!"),
+  title: z.string().min(1, "String must be non empty!"),
+  slug: z.string().min(1, "String must be non empty!"),
   locale: z.enum(["en", "ja"]),
   published: z.string().datetime(),
   isDraft: z.boolean().optional(),
@@ -33,7 +35,7 @@ export const PostMetaData_z = z.object({
   tags: z.array(z.string()),
   featuredImageURL: z.string().optional(),
   imageLegend: z.string().optional(),
-  description: z.string(),
+  description: z.string().min(1, "String must be non empty!"),
 });
 const PostContent = z.object({ content: z.string() });
 
