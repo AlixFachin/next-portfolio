@@ -147,7 +147,7 @@ export async function getAllTagsList(language: string) {
     return result.sort((a, b) => b.frequency - a.frequency);
   } catch (e) {
     console.error("Error in getting All Posts Id!", e);
-    return {};
+    return [];
   }
 }
 

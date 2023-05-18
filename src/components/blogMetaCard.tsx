@@ -16,7 +16,9 @@ const BlogMetaCard: React.FC<BlogMetaCardProps> = ({ postData }) => {
           </h2>
         </Link>
         <div className="flex-grow"></div>
-        <div className="text-sm">{dayjs(postData.date).format("MMM-YY")}</div>
+        <div className="text-sm">
+          {dayjs(postData.published).format("MMM-YY")}
+        </div>
       </div>
       <div className="ml-2 flex flex-row items-center pt-1">
         {postData.tags.map((tag: string) => (
