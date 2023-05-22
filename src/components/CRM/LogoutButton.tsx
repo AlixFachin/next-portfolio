@@ -1,34 +1,27 @@
 import { useContext } from "react";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FirebaseAppContext } from "@/contexts/fbAppProvider";
+import { fb_logOut } from "@/lib/firebase";
 
-const LoginScreen = () => {
+const LogoutButton = () => {
   const app = useContext(FirebaseAppContext);
   if (!app) return <p>Woops! Firebase is not initialized...</p>;
 
   const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({
-    prompt: 'select_account',
-  })
 
-  const loginHandler = () => {
-    signInWithPopup(auth, provider).then((userCredentials) => {
-      console.log(
-        `Finished to login with user ${userCredentials.user.displayName}`
-      );
-    });
+  const logoutHandler = () => {
+    fb_logOut(auth);
   };
 
   return (
     <div
       className="mr-8 min-w-fit rounded-md bg-blue-400 text-center p-2 text-white hover:bg-orange-300"
       role="button"
-      onClick={loginHandler}
+      onClick={logoutHandler}
     >
-      Sign in
+      Logout
     </div>
   );
 };
 
-export default LoginScreen;
+export default LogoutButton;

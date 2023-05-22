@@ -52,27 +52,31 @@ export async function fb_getAllPostsMetaDataList(
   firebaseApp: FirebaseApp,
   includeDrafts: boolean = false
 ): Promise<PostMetaData[]> {
-  const db = getFirestore(firebaseApp);
-  let querySnapshot: QuerySnapshot;
-  if (includeDrafts) {
-    querySnapshot = await getDocs(collection(db, "posts"));
-  } else {
-    const q = query(collection(db, "posts"), where("isDraft", "!=", true));
-    querySnapshot = await getDocs(q);
-  }
+  try {
+    const db = getFirestore(firebaseApp);
+    let querySnapshot: QuerySnapshot;
+    if (includeDrafts) {
+      querySnapshot = await getDocs(collection(db, "posts"));
+    } else {
+      const q = query(collection(db, "posts"), where("isDraft", "!=", true));
+      querySnapshot = await getDocs(q);
+    }
 
-  const postArray: PostMetaData[] = [];
-  querySnapshot.forEach((doc) => {
-    const postMetaData: PostMetaData = PostMetaData_z.parse({
-      ...doc.data(),
-      published: doc.data().published.toDate().toISOString(),
-      id: doc.id,
+    const postArray: PostMetaData[] = [];
+    querySnapshot.forEach((doc) => {
+      const postMetaData: PostMetaData = PostMetaData_z.parse({
+        ...doc.data(),
+        published: doc.data().published.toDate().toISOString(),
+        id: doc.id,
+      });
+
+      postArray.push(postMetaData);
     });
 
-    postArray.push(postMetaData);
-  });
-
-  return postArray;
+    return postArray;
+  } catch (e) {
+    return Promise.reject(e);
+  }
 }
 
 export async function fb_getFeaturedPostsMetaDataList(

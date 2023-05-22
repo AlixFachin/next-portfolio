@@ -3,6 +3,7 @@ import { fb_logOut } from "@/lib/firebase";
 import { useContext } from "react";
 import { getAuth } from "firebase/auth";
 import { FirebaseAppContext } from "@/contexts/fbAppProvider";
+import LogoutButton from "./CRM/LogoutButton";
 
 type NavLink = {
   id: number;
@@ -83,13 +84,7 @@ const AdminHeader = () => {
         <div className="mr-4 rounded-md bg-white/30 px-2 ">
           {firebaseAuth.currentUser?.displayName}
         </div>
-        <div
-          className="mr-8 min-w-fit hover:text-lg"
-          role="button"
-          onClick={() => fb_logOut(firebaseAuth)}
-        >
-          Logout
-        </div>
+        <LogoutButton />
         {/* <div className="mr-8">🇺🇸</div> */}
       </div>
     </header>
