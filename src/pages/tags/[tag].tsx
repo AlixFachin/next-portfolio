@@ -44,8 +44,8 @@ const TagPage: NextPage<TagPageProps> = ({ tag, postDataList }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <StdLayout>
-        <div className="flex flex-col bg-white/90 rounded-md px-4 py-12">
-          <h1 className="text-5xl font-serif mb-6 p-4 rounded-sm text-orange-300">
+        <div className="flex flex-col rounded-md bg-white/90 px-4 py-12">
+          <h1 className="font-serif mb-6 rounded-sm p-4 text-5xl text-orange-300">
             Posts with the {tag} tag
           </h1>
           <div>

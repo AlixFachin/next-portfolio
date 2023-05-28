@@ -1,4 +1,9 @@
 import Link from "next/link";
+import { fb_logOut } from "@/lib/firebase";
+import { useContext } from "react";
+import { getAuth } from "firebase/auth";
+import { FirebaseAppContext } from "@/contexts/fbAppProvider";
+import LogoutButton from "./CRM/LogoutButton";
 
 type NavLink = {
   id: number;
@@ -6,7 +11,10 @@ type NavLink = {
   label: string;
 };
 
-const Header = () => {
+const AdminHeader = () => {
+  const fbApp = useContext(FirebaseAppContext);
+  const firebaseAuth = getAuth(fbApp);
+
   const navLinks: NavLink[] = [
     {
       id: 0,
@@ -15,14 +23,14 @@ const Header = () => {
     },
     {
       id: 1,
-      href: "/posts",
-      label: "Blog",
+      href: "/admin",
+      label: "Posts Dashboard",
     },
     {
-      id: 2,
-      href: "/about",
-      label: "About",
-    },
+        id: 2,
+        href: "/admin/pageList",
+        label: "Pages Dashboard",
+    }
   ];
 
   return (
@@ -38,8 +46,8 @@ const Header = () => {
         >
           <defs>
             <linearGradient id="gradient" x1="0%" y1="50%" x2="100%" y2="50%">
-              <stop offset="5%" stopColor="#ff6900"></stop>
-              <stop offset="95%" stopColor="#fcb900"></stop>
+              <stop offset="5%" stopColor="#86A5D9"></stop>
+              <stop offset="95%" stopColor="#0496FF"></stop>
             </linearGradient>
           </defs>
           <path
@@ -71,17 +79,21 @@ const Header = () => {
       {
         // Navbar header
       }
-      <div className="fixed top-0 left-0 z-10 flex h-12 w-screen items-center  justify-start bg-gradient-to-r from-orange-400 to-orange-300 px-4">
+      <div className="fixed top-0 left-0 z-10 flex h-12 w-screen items-center  justify-start bg-gradient-to-r from-blue-300 to-blue-200 px-4">
         {navLinks.map((navItem) => (
-          <div key={navItem.id} className="mr-8 min-w-fit hover:text-lg">
+          <div key={navItem.id} className="mr-8 min-w-fit hover:text-orange-200">
             <Link href={navItem.href}>{navItem.label}</Link>
           </div>
         ))}
         <div className="flex-grow"></div>
+        <div className="mr-4 rounded-md bg-white/30 px-2 ">
+          {firebaseAuth.currentUser?.displayName}
+        </div>
+        <LogoutButton />
         {/* <div className="mr-8">🇺🇸</div> */}
       </div>
     </header>
   );
 };
 
-export default Header;
+export default AdminHeader;
