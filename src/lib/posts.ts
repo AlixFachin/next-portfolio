@@ -32,7 +32,7 @@ export const PostMetaData_z = z.object({
     tags: z.array(z.string()),
     featuredImageURL: z.string().optional(),
     imageLegend: z.string().optional(),
-    description: z.string().min(1, 'String must be non empty!'),
+    description: z.string(),
 });
 const PostContent = z.object({ content: z.string() });
 
