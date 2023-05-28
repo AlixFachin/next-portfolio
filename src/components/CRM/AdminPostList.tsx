@@ -71,10 +71,7 @@ const AdminPostList = () => {
   }
 
   return (
-    <div className="flex flex-col">
-      <div className="bg-orange-300" role="button" onClick={refreshList}>
-        Refresh
-      </div>
+    <div className="flex flex-col">      
       <EditablePostList postList={postList} refreshList={refreshList} />
     </div>
   );

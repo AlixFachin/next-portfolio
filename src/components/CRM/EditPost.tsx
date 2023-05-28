@@ -78,15 +78,12 @@ const EditPost: React.FC<EditPostProps> = ({ postId }) => {
           ...returnPostData,
           tagString: returnPostData.tags.join(","),
         };
-        console.log(`Setting post initial values to `, newPostData);
         setPostData(newPostData);
       }
     });
   }, []);
 
   const formSubmitHandler: SubmitHandler<FormData> = async (data) => {
-    console.log(`Trying to save the data`);
-    console.log(data);
 
     // fancy way to remove the 'tagString' property from the fbData sent to Firebase
     const { tagString: _, ...fbData } = {

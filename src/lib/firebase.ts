@@ -233,3 +233,43 @@ export async function fb_deletePost(firebaseApp: FirebaseApp, postId: string) {
 
   await deleteDoc(doc(db, "posts", postId));
 }
+
+/**
+ * 
+ * @param firebaseApp firebase App instance
+ * @param pageId page slug / id
+ * @param locale language in which the page is written
+ * @returns a promise resolving with the markdown string with the page content
+ */
+export async function fb_getPageContent(
+    firebaseApp: FirebaseApp,
+    pageId: string,
+    locale: string,
+  ): Promise<string> {
+    const db = getFirestore(firebaseApp);
+    const docSnap = await getDoc(doc(db, `pages/locales/${locale}`, pageId));
+    
+
+    if (!docSnap.exists()) {
+        console.error(`Page not found for slug id ${pageId}`);
+        return '';
+    }
+
+    return docSnap.data().content;
+  }
+
+  /**
+   * Saves a page into the CRM database. If the page doesn't exist it will be created.
+   * 
+   * @param firebaseApp firebaseApp instance
+   * @param pageId ID of the page intended to be modified
+   * @param locale string corresponding to the locale of the intended page
+   * @param content string containing the markdown content from the page
+   */
+  export async function fb_savePageContent(firebaseApp: FirebaseApp, pageId: string, locale: string, content: string) {
+    const db = getFirestore(firebaseApp);
+
+    await setDoc(doc(db, `pages/locales/${locale}`,pageId), {
+        content: content
+      });
+  }

@@ -7,6 +7,8 @@ import remarkParse from "remark-parse";
 import rehypeStringify from "rehype-stringify";
 
 import { getGHFileContentFromId } from "./github";
+import { fb_getPageContent } from "./firebase";
+import { getFirebaseApp_server } from "./firebase_server";
 
 export type StaticPageData = {
   contentHtml: string;
@@ -16,7 +18,9 @@ const getPageData = async (
   pageName: string,
   locale: string
 ): Promise<StaticPageData> => {
-  const fileContents = await getGHFileContentFromId("pages", locale, pageName);
+  
+  const fbApp = getFirebaseApp_server();
+  const fileContents = await fb_getPageContent(fbApp, pageName, locale );
 
   const matterResult = matter(fileContents);
   const processedContent = await unified()

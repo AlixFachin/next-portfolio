@@ -24,8 +24,13 @@ const AdminHeader = () => {
     {
       id: 1,
       href: "/admin",
-      label: "Admin Dashboard",
+      label: "Posts Dashboard",
     },
+    {
+        id: 2,
+        href: "/admin/pageList",
+        label: "Pages Dashboard",
+    }
   ];
 
   return (
@@ -76,7 +81,7 @@ const AdminHeader = () => {
       }
       <div className="fixed top-0 left-0 z-10 flex h-12 w-screen items-center  justify-start bg-gradient-to-r from-blue-300 to-blue-200 px-4">
         {navLinks.map((navItem) => (
-          <div key={navItem.id} className="mr-8 min-w-fit hover:text-lg">
+          <div key={navItem.id} className="mr-8 min-w-fit hover:text-orange-200">
             <Link href={navItem.href}>{navItem.label}</Link>
           </div>
         ))}

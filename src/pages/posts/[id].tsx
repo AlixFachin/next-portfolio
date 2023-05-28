@@ -85,14 +85,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
   const postData = await getPostData("en", params.id as string);
 
-  console.log(`Source MD content`, postData?.content);
   const contentHtml = await (async () => {
     if (postData?.content) {
       return markdownToHtml(postData?.content);
     }
     return Promise.resolve("");
   })();
-  console.log(`Trying to get the content`, contentHtml);
   return {
     props: {
       ...postData,

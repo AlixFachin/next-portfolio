@@ -22,7 +22,7 @@ const EditablePostList: React.FC<EditablePostListProps> = ({
     useState<ConfirmDialogProps | null>(null);
 
   if (postList.length === 0) {
-    return <div>Empty list!</div>;
+    return <div>No posts written yet! Please create your first post with the `New Post` button above</div>;
   }
 
   // Functions related to displaying the confirmation dialog
@@ -64,7 +64,6 @@ const EditablePostList: React.FC<EditablePostListProps> = ({
         //TODO: Show a spinner / waiting item instead of the list, and
         // force a refresh afterwards
         fb_deletePost(firebaseApp, postId).then(() => {
-          console.log("Trying to refresh the list!", refreshList);
           if (refreshList) refreshList();
         });
       }
@@ -78,9 +77,16 @@ const EditablePostList: React.FC<EditablePostListProps> = ({
       ) : (
         ""
       )}
-      <div className="mb-4 flex border-b-2 border-blue-200">
-        <h2 className="mb-4 text-4xl text-blue-400">List of all posts</h2>
+      <div className="mb-4 flex border-b-2 border-blue-200 items-center" >
+        <h2 className="mb-4 text-4xl text-blue-400">All Posts List</h2>
         <div className="flex-grow"></div>
+        <div
+          className="mx-4 h-fit rounded-md bg-orange-300 py-2 px-4 text-white text-sm"
+          role="button"
+          onClick={() => { if (refreshList) refreshList(); }}
+        >
+          Refresh List
+        </div>
         <div
           className="mr-4 h-fit rounded-md bg-blue-400 py-2 px-4 text-white"
           role="button"
@@ -96,8 +102,7 @@ const EditablePostList: React.FC<EditablePostListProps> = ({
           key={postData.id}
         >
           <div className="col-span-4 min-w-[800px] font-title text-2xl text-blue-400">
-            {" "}
-            {postData.title}
+            {postData.title }{ (postData.isDraft ? <span className="text-orange-300 text-xl italic"> (draft) </span> : '' )}
           </div>
           <Link href={`admin/edit/${postData.id}`}>
             <div
