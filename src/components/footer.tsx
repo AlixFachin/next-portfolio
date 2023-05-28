@@ -1,15 +1,15 @@
-import dayjs from "dayjs";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import dayjs from 'dayjs';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
-  const copyright = `copyright Alix Fachin ${dayjs().year()}`;
+    const copyright = `copyright Alix Fachin ${dayjs().year()}`;
 
-  return (
-    <footer className="relative py-4">
-      <div className="absolute bottom-0 left-0 -z-20 h-full w-full bg-blue-400">
-        {/* <svg
+    return (
+        <footer className="relative py-4">
+            <div className="absolute bottom-0 left-0 -z-20 h-full w-full bg-blue-400">
+                {/* <svg
           width="100%"
           height="100%"
           id="svg"
@@ -41,31 +41,34 @@ const Footer = () => {
             fillOpacity="1"
           ></path>
         </svg> */}
-      </div>
-      <div className="flex h-full flex-col items-center justify-end pb-2 text-sm italic text-white/90">
-        <div className="mb-3 flex items-center justify-center py-1">
-          <div className="mr-8"> {copyright} </div>
-          <div className="mr-5 w-[20px] hover:text-orange-400">
-            <a
-              href="https://www.linkedin.com/in/alix-fachin/"
-              aria-label="My LinkedIn Page"
-            >
-              <FontAwesomeIcon icon={faLinkedin} />
-            </a>
-          </div>
-          <div className="w-[20px] hover:text-orange-400">
-            <a href="https://github.com/AlixFachin" aria-label="My GitHub page">
-              <FontAwesomeIcon icon={faGithub} />
-            </a>
-          </div>
-        </div>
-        <p className="text-center">
-          Realized with love, sweat and coffee (maybe in a different order)
-          using <a href="https://nextjs.org">Next.js</a>
-        </p>
-      </div>
-    </footer>
-  );
+            </div>
+            <div className="flex h-full flex-col items-center justify-end pb-2 text-sm italic text-white/90">
+                <div className="mb-3 flex items-center justify-center py-1">
+                    <div className="mr-8"> {copyright} </div>
+                    <div className="mr-5 w-[20px] hover:text-orange-400">
+                        <a
+                            href="https://www.linkedin.com/in/alix-fachin/"
+                            aria-label="My LinkedIn Page"
+                        >
+                            <FontAwesomeIcon icon={faLinkedin} />
+                        </a>
+                    </div>
+                    <div className="w-[20px] hover:text-orange-400">
+                        <a
+                            href="https://github.com/AlixFachin"
+                            aria-label="My GitHub page"
+                        >
+                            <FontAwesomeIcon icon={faGithub} />
+                        </a>
+                    </div>
+                </div>
+                <p className="text-center">
+                    Realized with love, sweat and coffee (maybe in a different
+                    order) using <a href="https://nextjs.org">Next.js</a>
+                </p>
+            </div>
+        </footer>
+    );
 };
 
 export default Footer;

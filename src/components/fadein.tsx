@@ -1,65 +1,73 @@
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 export interface FadeInProps {
-  children?: React.ReactNode;
-  direction: "from-left" | "from-right" | "from-below" | "from-above" | "none";
-  delay?: number;
+    children?: React.ReactNode;
+    direction:
+        | 'from-left'
+        | 'from-right'
+        | 'from-below'
+        | 'from-above'
+        | 'none';
+    delay?: number;
 }
 
 const FadeIn = ({ children, direction, delay }: FadeInProps) => {
-  const [isVisible, setVisible] = useState(false);
-  const domRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setVisible] = useState(false);
+    const domRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target === (domRef.current as Element)) {
-            if (delay && entry.isIntersecting) {
-              // we don't take into account the delay when hide element
-              setTimeout(() => setVisible(entry.isIntersecting), delay);
-            } else {
-              setVisible(entry.isIntersecting);
-            }
-          }
-        });
-      },
-      { threshold: 0.8 }
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.target === (domRef.current as Element)) {
+                        if (delay && entry.isIntersecting) {
+                            // we don't take into account the delay when hide element
+                            setTimeout(
+                                () => setVisible(entry.isIntersecting),
+                                delay
+                            );
+                        } else {
+                            setVisible(entry.isIntersecting);
+                        }
+                    }
+                });
+            },
+            { threshold: 0.8 }
+        );
+        const observedElement = domRef.current as Element;
+        if (observedElement) {
+            observer.observe(observedElement);
+            return () => {
+                observer.unobserve(observedElement);
+            };
+        }
+    }, [delay]);
+
+    const classDirection = useMemo(() => {
+        switch (direction) {
+            case 'from-above':
+                return 'from-above';
+            case 'from-below':
+                return 'from-below';
+            case 'from-left':
+                return 'from-left';
+            case 'from-right':
+                return 'from-right';
+            default:
+                return '';
+        }
+    }, [direction]);
+
+    return (
+        <div
+            className={`fade-in-section ${classDirection} ${
+                isVisible ? 'is-visible' : ''
+            }`}
+            ref={domRef}
+        >
+            {children}
+        </div>
     );
-    const observedElement = domRef.current as Element;
-    if (observedElement) {
-      observer.observe(observedElement);
-      return () => {
-        observer.unobserve(observedElement);
-      };
-    }
-  }, [delay]);
-
-  const classDirection = useMemo(() => {
-    switch (direction) {
-      case "from-above":
-        return "from-above";
-      case "from-below":
-        return "from-below";
-      case "from-left":
-        return "from-left";
-      case "from-right":
-        return "from-right";
-      default:
-        return "";
-    }
-  }, [direction]);
-
-  return (
-    <div
-      className={`fade-in-section ${classDirection} ${
-        isVisible ? "is-visible" : ""
-      }`}
-      ref={domRef}
-    >
-      {children}
-    </div>
-  );
 };
 
 export default FadeIn;

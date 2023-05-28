@@ -3,98 +3,98 @@
 @tailwind utilities;
 
 html {
-  @apply text-darkgrey-300;
+    @apply text-darkgrey-300;
 }
 
 article h1 {
-  @apply mb-4 font-title text-5xl font-bold tracking-tighter text-orange-200;
+    @apply mb-4 font-title text-5xl font-bold tracking-tighter text-orange-200;
 }
 
 article h2 {
-  @apply mb-2 mt-8 font-headers text-3xl text-orange-200;
+    @apply mb-2 mt-8 font-headers text-3xl text-orange-200;
 }
 
 article h3 {
-  @apply mb-2 mt-4 font-headers text-xl text-orange-200;
+    @apply mb-2 mt-4 font-headers text-xl text-orange-200;
 }
 
 article {
-  @apply leading-relaxed;
+    @apply leading-relaxed;
 }
 
 article p {
-  @apply mb-4;
+    @apply mb-4;
 }
 
 article ul {
-  @apply ml-4 mb-4 list-disc;
+    @apply ml-4 mb-4 list-disc;
 }
 
 article .highlight {
-  @apply my-2;
+    @apply my-2;
 }
 
 article a {
-  @apply text-orange-200 underline;
+    @apply text-orange-200 underline;
 }
 
 .tag {
-  @apply mr-3 rounded-full bg-orange-400 py-1 px-4 transition-colors hover:bg-orange-300;
+    @apply mr-3 rounded-full bg-orange-400 py-1 px-4 transition-colors hover:bg-orange-300;
 }
 
 code {
-  @apply my-3  overflow-auto bg-grey p-1;
+    @apply my-3  overflow-auto bg-grey p-1;
 }
 
 .md-editor code {
-  @apply bg-transparent;
+    @apply bg-transparent;
 }
 
 .highlight code {
-  @apply bg-inherit;
+    @apply bg-inherit;
 }
 
 .highlight pre {
-  @apply rounded-lg py-4 px-2;
+    @apply rounded-lg py-4 px-2;
 }
 
 section > code {
-  @apply bg-black;
+    @apply bg-black;
 }
 
 .admin-button {
-  @apply rounded-md bg-blue-400 py-2 px-4 text-center text-white;
+    @apply rounded-md bg-blue-400 py-2 px-4 text-center text-white;
 }
 
 .admin-button-warning {
-  @apply rounded-md bg-orange-200 py-2 px-4 text-center text-white;
+    @apply rounded-md bg-orange-200 py-2 px-4 text-center text-white;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* Fade in animation classes  */
-  .fade-in-section {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 1.2s ease-in, transform 1.2s ease-out;
-    will-change: opacity, visibility;
-  }
+    /* Fade in animation classes  */
+    .fade-in-section {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 1.2s ease-in, transform 1.2s ease-out;
+        will-change: opacity, visibility;
+    }
 
-  .fade-in-section.from-left {
-    transform: translateX(-10vw);
-  }
-  .fade-in-section.from-right {
-    transform: translateX(10vw);
-  }
-  .fade-in-section.from-above {
-    transform: translateY(-10vh);
-  }
-  .fade-in-section.from-below {
-    transform: translateY(10vh);
-  }
+    .fade-in-section.from-left {
+        transform: translateX(-10vw);
+    }
+    .fade-in-section.from-right {
+        transform: translateX(10vw);
+    }
+    .fade-in-section.from-above {
+        transform: translateY(-10vh);
+    }
+    .fade-in-section.from-below {
+        transform: translateY(10vh);
+    }
 
-  .fade-in-section.is-visible {
-    opacity: 1;
-    transform: none;
-    visibility: visible;
-  }
+    .fade-in-section.is-visible {
+        opacity: 1;
+        transform: none;
+        visibility: visible;
+    }
 }
