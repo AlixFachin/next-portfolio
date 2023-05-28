@@ -1,15 +1,30 @@
 import AdminLayout from '@/components/adminLayout';
 import { useRouter } from 'next/router';
 import EditPage from '@/components/CRM/EditPage';
+import { NextPage } from 'next';
+import Link from 'next/link';
 
-const EditPagePage = () => {
+const EditPagePage: NextPage = () => {
     const nextRouter = useRouter();
     const routeParams = nextRouter.query.pageParams;
 
     if (!Array.isArray(routeParams)) {
-        console.error('Error in the route parameters!');
-        nextRouter.replace('/admin');
-        return <></>;
+        return (
+            <AdminLayout>
+                <div className="flex flex-col bg-white/80">
+                    <h1 className="text-4xl">Error!</h1>
+                    <div>Page parameter incorrectly set!</div>
+                    <Link href="/admin/pageList">
+                        <div
+                            role="button"
+                            className="rounded-lg bg-orange-300 p-2"
+                        >
+                            Go back to admin page
+                        </div>
+                    </Link>
+                </div>
+            </AdminLayout>
+        );
     }
     const pageId: string = routeParams[0];
 
