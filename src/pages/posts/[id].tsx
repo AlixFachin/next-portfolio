@@ -47,7 +47,7 @@ const Post: NextPage<PostData & { contentHtml: string }> = ({
                 <section className="flex flex-col bg-white/90 py-4 px-2">
                     <header className="flex flex-col border-b-2 border-orange-300 pb-2">
                         <div className="flex items-center">
-                            <h1 className="font-serif rounded-lg py-4 px-2 text-xl text-orange-300 md:text-7xl">
+                            <h1 className="font-serif rounded-lg py-4 px-2 text-xl text-orange-300 md:text-4xl">
                                 {postData.title}
                             </h1>
                             <div className="flex-grow"></div>
@@ -66,7 +66,7 @@ const Post: NextPage<PostData & { contentHtml: string }> = ({
                             {dayjs(postData.published).format('MMM-DD-YYYY')}
                         </div>
                     </header>
-                    <article className="rounded-lg p-8 shadow-lg backdrop-blur-sm ">
+                    <article className="rounded-lg p-8 shadow-lg backdrop-blur-sm">
                         <div
                             dangerouslySetInnerHTML={{ __html: contentHtml }}
                         />

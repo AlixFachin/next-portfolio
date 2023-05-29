@@ -7,7 +7,7 @@ html {
 }
 
 article h1 {
-    @apply mb-4 font-title text-5xl font-bold tracking-tighter text-orange-200;
+    @apply mb-4 font-headers text-3xl font-bold tracking-tighter text-orange-200;
 }
 
 article h2 {

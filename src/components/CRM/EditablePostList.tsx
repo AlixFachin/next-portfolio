@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { FirebaseAppContext } from '@/contexts/fbAppProvider';
 import { fb_addPost, fb_deletePost } from '@/lib/firebase';
 import ConfirmDialog, { ConfirmDialogProps } from '@/components/ConfirmDialog';
+import { getAuth } from 'firebase/auth';
 
 type EditablePostListProps = {
     postList: PostMetaData[];
@@ -75,6 +76,27 @@ const EditablePostList: React.FC<EditablePostListProps> = ({
         );
     };
 
+    // Calling the revalidation API for major pages
+    const rebuildPages = async () => {
+        const auth = getAuth(firebaseApp);
+        auth.currentUser?.getIdToken(false).then((idToken) => {
+            console.log(`Token received:\n`,idToken);
+            // send the token to the back-end
+            fetch('/api/revalidate', {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${idToken}`
+                }
+            }).then(() => {
+                console.log(`Request sent!`)
+            }).catch((err) => {
+                console.error(`Error in the Next revalidate POST query!`,err);
+            })
+        }).catch((err)=> {
+            console.error(`Error inside the getIdToken of the auth part of rebuild function`);
+        })
+    }
+
     return (
         <div className="align-center flex flex-col bg-white/80 py-4 px-4">
             {dialogVisible && confirmDialogProps ? (
@@ -86,13 +108,20 @@ const EditablePostList: React.FC<EditablePostListProps> = ({
                 <h2 className="mb-4 text-4xl text-blue-400">All Posts List</h2>
                 <div className="flex-grow"></div>
                 <div
-                    className="mx-4 h-fit rounded-md bg-orange-300 py-2 px-4 text-sm text-white"
+                    className="mx-4 h-fit rounded-md bg-orange-400 py-2 px-4 text-sm text-white"
                     role="button"
                     onClick={() => {
                         if (refreshList) refreshList();
                     }}
                 >
                     Refresh List
+                </div>
+                <div
+                    className="mx-4 h-fit rounded-md bg-orange-300 py-2 px-4 text-sm text-white"
+                    role="button"
+                    onClick={rebuildPages}
+                >
+                    Rebuild Pages
                 </div>
                 <div
                     className="mr-4 h-fit rounded-md bg-blue-400 py-2 px-4 text-white"
