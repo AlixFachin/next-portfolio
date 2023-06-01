@@ -6,6 +6,7 @@ import { FirebaseAppContext } from '@/contexts/fbAppProvider';
 import { fb_addPost, fb_deletePost } from '@/lib/firebase';
 import ConfirmDialog, { ConfirmDialogProps } from '@/components/ConfirmDialog';
 import { getAuth } from 'firebase/auth';
+import revalidatePages from '@/lib/revalidate_client';
 
 type EditablePostListProps = {
     postList: PostMetaData[];
@@ -64,9 +65,6 @@ const EditablePostList: React.FC<EditablePostListProps> = ({
             `Are you sure you want to delete post ${postTitle}?\nPlease input ${confirmValue} to validate`,
             confirmValue,
             () => {
-                console.log(
-                    `Trying to delete the post ${postId} of title ${postTitle}`
-                );
                 //TODO: Show a spinner / waiting item instead of the list, and
                 // force a refresh afterwards
                 fb_deletePost(firebaseApp, postId).then(() => {
@@ -77,24 +75,8 @@ const EditablePostList: React.FC<EditablePostListProps> = ({
     };
 
     // Calling the revalidation API for major pages
-    const rebuildPages = async () => {
-        const auth = getAuth(firebaseApp);
-        auth.currentUser?.getIdToken(false).then((idToken) => {
-            console.log(`Token received:\n`,idToken);
-            // send the token to the back-end
-            fetch('/api/revalidate', {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${idToken}`
-                }
-            }).then(() => {
-                console.log(`Request sent!`)
-            }).catch((err) => {
-                console.error(`Error in the Next revalidate POST query!`,err);
-            })
-        }).catch((err)=> {
-            console.error(`Error inside the getIdToken of the auth part of rebuild function`);
-        })
+    const rebuildPages = async () => {        
+        await revalidatePages(firebaseApp, { pages: true })        
     }
 
     return (
