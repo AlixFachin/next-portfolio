@@ -13,11 +13,7 @@ const LoginScreen = () => {
     });
 
     const loginHandler = () => {
-        signInWithPopup(auth, provider).then((userCredentials) => {
-            console.log(
-                `Finished to login with user ${userCredentials.user.displayName}`
-            );
-        });
+        signInWithPopup(auth, provider);
     };
 
     return (

@@ -51,12 +51,7 @@ export async function getGHFileContentFromPath(
             owner: process.env.GH_OWNER || '',
             repo: process.env.GH_REPO || '',
             path: filePath,
-        }); // ouch - I don't manage to type this correctly to get access to the `data.content` property
-
-        // Decoding the result in Base 64
-        if (process.env.NODE_ENV === 'development') {
-            console.log(`Result of GetFileContentFromPath`, result);
-        }
+        });
 
         if (Array.isArray(result.data)) {
             return '';
@@ -69,7 +64,6 @@ export async function getGHFileContentFromPath(
         }
     } catch (error) {
         console.error(`Error in getGHFileContentFrom Path! ${filePath}`);
-        console.log(error);
         return '';
     }
 }
@@ -89,8 +83,6 @@ export async function getGHFileContentFromId(
             repo: process.env.GH_REPO || '',
             path: `${pagesOrPosts}/${locale}/${fileId}.md`,
         });
-        if (process.env.NODE_ENV === 'development')
-            console.log(`Result of GetFileContentFromId`, result);
         if (Array.isArray(result.data)) {
             return '';
         }
@@ -100,7 +92,6 @@ export async function getGHFileContentFromId(
         return '';
     } catch (error) {
         console.error(`Error in getGHFileFromId ${fileId}`);
-        console.log(error);
         return '';
     }
 }

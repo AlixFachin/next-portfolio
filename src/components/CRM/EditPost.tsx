@@ -17,6 +17,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import '@uiw/react-md-editor/markdown-editor.css';
 import '@uiw/react-markdown-preview/markdown.css';
 import dynamic from 'next/dynamic';
+import revalidatePages from '@/lib/revalidate_client';
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
 
@@ -35,8 +36,6 @@ const stringifyFormErrors = (formErrors: FieldErrors<FormData>) => {
         'description',
         'content',
     ] as const;
-
-    console.log(formErrors);
 
     return (
         potentialErrorsFields
@@ -92,6 +91,7 @@ const EditPost: React.FC<EditPostProps> = ({ postId }) => {
 
         try {
             await fb_savePost(firebaseApp, fbData);
+            await revalidatePages(firebaseApp, { postId: fbData.id });
             router.push('/admin');
         } catch (e) {
             console.error(`Error in the saving of the form`, e);

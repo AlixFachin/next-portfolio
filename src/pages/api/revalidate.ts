@@ -50,16 +50,21 @@ export default async function handler(
 
         if (decodedToken.uid === process.env.ISR_UID) {
             console.log(`Success! Send the revalidate...`)
-            // Re-validating the first page
-            
-            await res.revalidate('/index');
-            // TODO: Re-validating list of posts page
+            // Re-validating static root pages
+            await res.revalidate('/');
             await res.revalidate('/posts');
             
-            // TODO: Reading the parameter with the post ID, and then re-validating the posts page
-    
+            // revalidating the post which was modified (if indicated)
+            if (req.query.postId) {
+                await res.revalidate(`/posts/${req.query.postId}`);
+            }
+
             // TODO: If there is a parameter for "pages", re-validating all the pages 
             //  not a lot of pages, so might as well revalidate them all in one go
+            if (req.query.pages && req.query.pages === 'true') {
+                await res.revalidate('/404');
+                await res.revalidate('/about');
+            }
 
             return res.json({ revalidated: true });
         }        

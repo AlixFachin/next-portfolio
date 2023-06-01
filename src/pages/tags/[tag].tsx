@@ -14,8 +14,6 @@ type TagPageProps = {
 };
 
 const TagPage: NextPage<TagPageProps> = ({ tag, postDataList }) => {
-    if (process.env.NODE_ENV === 'development')
-        console.log(`Trying to display for tag ${tag}`, postDataList);
     return (
         <>
             <Head>
@@ -81,7 +79,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths,
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 
