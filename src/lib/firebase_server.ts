@@ -11,6 +11,7 @@ export function getFirebaseApp_server(): FirebaseApp {
         appId: '1:545624651853:web:0f294401f8ea897de74404',
         measurementId: 'G-72JHXBMG6F',
     };
+    //TODO: Look for already initialized apps to see if we can skip the app init
     const fbApp = initializeApp(firebaseConfig);
     return fbApp;
 }

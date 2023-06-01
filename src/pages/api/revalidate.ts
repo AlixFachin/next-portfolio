@@ -52,7 +52,8 @@ export default async function handler(
             console.log(`Success! Send the revalidate...`)
             // Re-validating the first page
             
-            await res.revalidate('/index');
+            await res.revalidate('/');
+
             // TODO: Re-validating list of posts page
             await res.revalidate('/posts');
             

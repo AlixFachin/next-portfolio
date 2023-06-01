@@ -7,7 +7,9 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import Head from 'next/head';
 
-const Post: NextPage<PostData & { contentHtml: string }> = ({
+type PostPageData = PostData & { contentHtml: string };
+
+const Post: NextPage<PostPageData> = ({
     contentHtml,
     ...postData
 }) => {
@@ -82,17 +84,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const paths = await getAllPostsIds('en');
     return {
         paths,
-        fallback: false,
+        fallback: 'blocking',
     };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PostPageData> = async ({ params }) => {
     if (!params || !params.id || Array.isArray(params.id)) {
         return {
             notFound: true,
         };
     }
     const postData = await getPostData('en', params.id as string);
+    if (!postData) {
+        return {
+            notFound: true,
+        };        
+    }
 
     const contentHtml = await (async () => {
         if (postData?.content) {
