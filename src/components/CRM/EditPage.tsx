@@ -18,6 +18,7 @@ import rehypeSanitize from 'rehype-sanitize';
 import '@uiw/react-md-editor/markdown-editor.css';
 import '@uiw/react-markdown-preview/markdown.css';
 import dynamic from 'next/dynamic';
+import revalidatePages from '@/lib/revalidate_client';
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
 
@@ -72,6 +73,7 @@ const EditPage: React.FC<EditPageProps> = ({ pageId, pageLang }) => {
                 pageLang,
                 data.content
             );
+            await revalidatePages(firebaseApp, { pages: true });
             router.push('/admin/pageList');
         } catch (e) {
             console.error(`Error in the saving of the form`, e);
