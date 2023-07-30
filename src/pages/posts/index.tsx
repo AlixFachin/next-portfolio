@@ -3,6 +3,7 @@ import { getAllTagsList, getSortedPostsData } from '@/lib/posts';
 import StdLayout from '@/components/stdlayout';
 import Head from 'next/head';
 import BlogMetaCard from '@/components/blogMetaCard';
+import SmallPostCard from '@/components/SmallPostCard';
 
 type BlogRollParams = {
     allPostsData: Awaited<ReturnType<typeof getSortedPostsData>>;
@@ -50,9 +51,16 @@ const AllPosts: NextPage<BlogRollParams> = ({ allPostsData }) => {
                     </h1>
                     <section className="blogRoll">
                         {allPostsData.map((postData, loop_index) => (
-                            <BlogMetaCard
-                                postData={postData}
+                            // <BlogMetaCard
+                            //     postData={postData}
+                            //     key={`post-${postData.id}-${loop_index}`}
+                            // />
+                            <SmallPostCard
                                 key={`post-${postData.id}-${loop_index}`}
+                                {...postData}
+                                imageId={
+                                    loop_index % 2 === 0 ? 'fire' : 'staircase'
+                                }
                             />
                         ))}
                     </section>

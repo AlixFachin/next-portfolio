@@ -88,7 +88,7 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
                                     </span>
                                 </li>
                                 <li>
-                                    The first game I played was &quot;New
+                                    The first video game I played was &quot;New
                                     Zealand Story&quot; from Taito, on an Amiga
                                     500
                                 </li>
@@ -97,12 +97,14 @@ const BioSummary: React.FunctionComponent<{ extraClass?: string }> = ({
                                     scientific calculator HP48SX in high school
                                 </li>
                                 <li>
-                                    The first video game I really finished was
-                                    Final Fantasy X on PS2
+                                    The first video game I finished without
+                                    cheat codes was Final Fantasy X on PS2
                                 </li>
                                 <li>
-                                    My favourite game ever was The Last of Us II
-                                    on PS4
+                                    My favourite video game ever was{' '}
+                                    <a href="https://www.playstation.com/en-us/games/the-last-of-us-part-ii/">
+                                        The Last of Us II on PS4
+                                    </a>
                                 </li>
                             </ul>
                         </div>

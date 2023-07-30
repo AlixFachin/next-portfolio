@@ -1,6 +1,10 @@
 import { FirebaseApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';
-
+/**
+ * function called to trigger the Next page revalidation. Used when a post has been modified - the corresponding page would have to be modified statically.
+ * @param firebaseApp reference to fireBase app (can be client or server side)
+ * @param options contains the post Id of the post to be rebuilt. if pages is true, will rebuild all pages.
+ */
 const revalidatePages = async (firebaseApp: FirebaseApp, options?: { postId?: string, pages?: boolean } ) => {
 
     const auth = getAuth(firebaseApp);
