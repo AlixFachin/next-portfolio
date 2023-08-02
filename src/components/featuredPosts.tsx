@@ -1,6 +1,5 @@
-import { PostMetaData } from '@/lib/posts';
+import { DefaultPostImage, PostMetaData } from '@/lib/posts';
 import Link from 'next/link';
-import LandscapeCard from './LandscapePostCard';
 import dayjs from 'dayjs';
 import PortraitPostCard from './PortraitPostCard';
 
@@ -73,7 +72,17 @@ const FeaturedPosts: React.FunctionComponent<FeaturedPostsProps> = ({
                         published={dayjs(post.published)}
                         blogSummary={post.description}
                         tags={post.tags}
-                        imageId="staircase"
+                        imageURL={
+                            post.featuredImageURL
+                                ? post.featuredImageURL
+                                : DefaultPostImage.url
+                        }
+                        imageAlt={
+                            post.featuredImageURL
+                                ? post.imageAlt ||
+                                  `Featured image for blog ${post.title}`
+                                : DefaultPostImage.alt
+                        }
                         key={post.id}
                     />
                 ))}

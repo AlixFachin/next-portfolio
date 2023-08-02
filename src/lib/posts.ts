@@ -30,9 +30,10 @@ export const PostMetaData_z = z.object({
     isDraft: z.boolean().optional(),
     featured: z.boolean().optional(),
     tags: z.array(z.string()),
+    description: z.string(),
     featuredImageURL: z.string().optional(),
     imageLegend: z.string().optional(),
-    description: z.string(),
+    imageAlt: z.string().optional(),
 });
 const PostContent = z.object({ content: z.string() });
 
@@ -40,6 +41,12 @@ export const PostData_z = PostMetaData_z.merge(PostContent);
 
 export type PostMetaData = z.infer<typeof PostMetaData_z>;
 export type PostData = z.infer<typeof PostData_z>;
+
+export const DefaultPostImage = {
+    url: 'https://firebasestorage.googleapis.com/v0/b/blog-crm-3db84.appspot.com/o/giorgio-trovato-unsplash.jpg?alt=media&token=60951f62-1f06-4dc8-b422-2eebb602c526',
+    legend: 'Picture by Giorgio Trovato on Unsplash',
+    alt: 'Lamp with an orange light in the dark',
+};
 
 export async function markdownToHtml(mdContent: string): Promise<string> {
     const processedContent = await unified()

@@ -9,7 +9,7 @@ const StdLayout = ({ children }: LayoutProps) => {
     return (
         <>
             <Header />
-            <main className="container mx-auto mt-[10vh] min-h-[400px] max-w-3xl pt-4">
+            <main className="container mx-auto mt-[10vh] min-h-[400px] max-w-4xl pt-4">
                 {children}
             </main>
             <Footer />
