@@ -21,7 +21,7 @@ const SmallPostCard: React.FC<CardPostData> = (postData) => {
 
     return (
         <Link href={`/posts/${postData.id}`}>
-            <div className="mr-4 mb-4 flex  w-[260px] flex-col items-center justify-start rounded-lg border-[1px] border-orange-400 hover:shadow-2xl hover:shadow-orange-300 sm:h-[150px] sm:w-full sm:flex-row">
+            <div className="mr-4 mb-4 flex  w-[260px] flex-col items-center justify-start rounded-lg border-[1px] border-orange-400 hover:scale-105 hover:shadow-2xl hover:shadow-orange-300 sm:h-[150px] sm:w-full sm:flex-row">
                 <div className="flex h-[148px] w-[250px] items-center justify-center overflow-hidden rounded-lg shadow-sm">
                     <Image
                         width={800}

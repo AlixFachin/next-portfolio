@@ -83,7 +83,7 @@ const Header = () => {
             {
                 // Navbar header
             }
-            <div className="fixed top-0 left-0 z-10 flex h-12 w-screen items-center  justify-start bg-gradient-to-r from-orange-400 to-orange-300 px-4">
+            <div className="absolute top-0 left-0 z-10 flex h-12 w-screen items-center  justify-start bg-gradient-to-r from-orange-400 to-orange-300 px-4">
                 {navLinks.map((navItem) => (
                     <div
                         key={navItem.id}

@@ -58,9 +58,6 @@ const AllPosts: NextPage<BlogRollParams> = ({ allPostsData }) => {
                             <SmallPostCard
                                 key={`post-${postData.id}-${loop_index}`}
                                 {...postData}
-                                imageId={
-                                    loop_index % 2 === 0 ? 'fire' : 'staircase'
-                                }
                             />
                         ))}
                     </section>
