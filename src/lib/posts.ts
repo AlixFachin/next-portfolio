@@ -5,7 +5,7 @@ import rehypeHighlight from 'rehype-highlight';
 import remarkRehype from 'remark-rehype';
 import remarkParse from 'remark-parse';
 import rehypeStringify from 'rehype-stringify';
-import rehypeSanitize from 'rehype-sanitize';
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 
 import { z } from 'zod';
 
@@ -52,8 +52,26 @@ export async function markdownToHtml(mdContent: string): Promise<string> {
     const processedContent = await unified()
         .use(remarkParse)
         .use(remarkRehype)
+        .use(rehypeSanitize, {
+            ...defaultSchema,
+            attributes: {
+                ...defaultSchema.attributes,
+                code: [
+                    ...(defaultSchema.attributes?.code || []),
+                    [
+                        'className',
+                        'language-js',
+                        'language-javascript',
+                        'language-typeScript',
+                        'language-ts',
+                        'language-rust',
+                        'language-css',
+                        'language-md',
+                    ],
+                ],
+            },
+        })
         .use(rehypeHighlight)
-        .use(rehypeSanitize)
         .use(rehypeStringify)
         .process(mdContent);
 

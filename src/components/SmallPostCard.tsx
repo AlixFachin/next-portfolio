@@ -9,7 +9,7 @@ const SmallPostCard: React.FC<CardPostData> = (postData) => {
     let tagsDisplay = null;
     if (postData.tags.length > 0) {
         tagsDisplay = (
-            <div className="flex flex-wrap text-sm font-light uppercase text-orange-400">
+            <div className="flex flex-wrap text-xs font-light uppercase text-orange-400 md:text-sm">
                 {postData.tags.map((tag, index) => (
                     <div className="mr-6" key={index}>
                         {tag}
@@ -22,7 +22,7 @@ const SmallPostCard: React.FC<CardPostData> = (postData) => {
     return (
         <Link href={`/posts/${postData.id}`}>
             <div className="mr-4 mb-4 flex  w-[260px] flex-col items-center justify-start rounded-lg border-[1px] border-orange-400 hover:scale-105 hover:shadow-2xl hover:shadow-orange-300 sm:h-[150px] sm:w-full sm:flex-row">
-                <div className="flex h-[148px] w-[250px] items-center justify-center overflow-hidden rounded-lg shadow-sm">
+                <div className="flex h-[146px] w-[250px] min-w-[250px] items-center justify-center overflow-hidden rounded-lg shadow-sm">
                     <Image
                         width={800}
                         height={350}
@@ -49,10 +49,10 @@ const SmallPostCard: React.FC<CardPostData> = (postData) => {
                         </div>
                         {tagsDisplay}
                     </div>
-                    <h4 className="text-2xl font-bold text-orange-200">
+                    <h4 className="text-xl font-bold text-orange-200 lg:text-2xl">
                         {postData.title}
                     </h4>
-                    <p className="flex-grow overflow-hidden text-ellipsis">
+                    <p className="flex-grow overflow-hidden  text-ellipsis text-xs font-light sm:text-sm md:text-base">
                         {postData.description}
                     </p>
                 </div>
