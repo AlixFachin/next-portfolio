@@ -163,6 +163,21 @@ const EditPost: React.FC<EditPostProps> = ({ postId }) => {
                         className="border py-2 px-3 text-darkgrey-200"
                         {...register('tagString')}
                     />
+                    <label htmlFor="imageURL">Image URL</label>
+                    <input
+                        className="border py-2 px-3 text-darkgrey-200 invalid:text-red lg:col-span-3"
+                        {...register('featuredImageURL')}
+                    />
+                    <label htmlFor="imageAlt">Image Alt</label>
+                    <input
+                        className="border py-2 px-3 text-darkgrey-200 invalid:text-red lg:col-span-3"
+                        {...register('imageAlt')}
+                    />
+                    <label htmlFor="imageLegend">Image Legend</label>
+                    <input
+                        className="border py-2 px-3 text-darkgrey-200 invalid:text-red lg:col-span-3"
+                        {...register('imageLegend')}
+                    />
                     <div className="border-red text-red">
                         {stringifyFormErrors(errors)}
                     </div>

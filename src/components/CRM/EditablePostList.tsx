@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { FirebaseAppContext } from '@/contexts/fbAppProvider';
 import { fb_addPost, fb_deletePost } from '@/lib/firebase';
 import ConfirmDialog, { ConfirmDialogProps } from '@/components/ConfirmDialog';
-import { getAuth } from 'firebase/auth';
 import revalidatePages from '@/lib/revalidate_client';
 
 type EditablePostListProps = {

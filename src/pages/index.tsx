@@ -163,10 +163,7 @@ const Home: NextPage<HomeParams> = ({ featuredPostsData }) => {
                     </svg>
                 </div>
 
-                <FeaturedPosts
-                    postsData={featuredPostsData}
-                    extraClass="h-[100vh]"
-                />
+                <FeaturedPosts postsData={featuredPostsData} />
                 <BioSummary />
             </main>
             <Footer />
