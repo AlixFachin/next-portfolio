@@ -30,7 +30,7 @@ const localesList = ['en', 'ja'];
 
 const AdminPageList = () => {
     const user = useContext(FirebaseUserContext);
-    const [error, setError] = useState<string>('');
+    const [error, _setError] = useState<string>('');
 
     if (!user) {
         return (

@@ -16,20 +16,22 @@ const revalidatePages = async (firebaseApp: FirebaseApp, options?: { postId?: st
             const firstToken = options && (options.postId || options.pages) ? '?' : '';
             const secondToken = postParam !== '' && pagesParam !== '' ? '&' : '';
 
-            const queryURL = '/api/revalidate' + firstToken + postParam + secondToken + pagesParam ;           
-            console.log(`Sending query ${queryURL}`);
+            const queryURL =
+                '/api/revalidate' +
+                firstToken +
+                postParam +
+                secondToken +
+                pagesParam;
 
             // send the token to the back-end
             fetch(queryURL, {
                 method: 'GET',
                 headers: {
-                    Authorization: `Bearer ${idToken}`
-                }
-            }).then(() => {
-                console.log(`Request sent!`)
+                    Authorization: `Bearer ${idToken}`,
+                },
             }).catch((err) => {
-                console.error(`Error in the Next revalidate POST query!`,err);
-            })
+                console.error(`Error in the Next revalidate POST query!`, err);
+            });
         }).catch((err)=> {
             console.error(`Error inside the getIdToken of the auth part of rebuild function`, err);
         })

@@ -38,6 +38,9 @@ article a {
     @apply text-orange-200 underline;
 }
 
+article.post-body img :not(featured-image) {
+    @apply max-w-[400px];
+}
 .tag {
     @apply mr-3 rounded-full bg-orange-400 py-1 px-4 transition-colors hover:bg-orange-300;
 }

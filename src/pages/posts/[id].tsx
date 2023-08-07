@@ -23,12 +23,13 @@ const ImageArea: React.FC<{
     if (!imageURL) return null;
 
     return (
-        <div className="mb-4 flex flex-col items-center justify-start">
+        <div className="featured-image mb-4 flex flex-col items-center justify-start">
             <Image
                 src={imageURL}
                 alt={imageAlt || imageLegend || `Abstract image for blog post`}
                 width={800}
                 height={450}
+                className="featured-image"
             />
             {imageLegend ? <div className="text-sm">{imageLegend}</div> : null}
         </div>
@@ -91,7 +92,7 @@ const Post: NextPage<PostPageData> = ({ contentHtml, ...postData }) => {
                             ))}
                         </div>
                     </header>
-                    <article className="flex flex-col items-start justify-start p-8">
+                    <article className="post-body flex flex-col items-start justify-start p-8">
                         {postData.featuredImageURL ? (
                             <ImageArea
                                 imageURL={postData.featuredImageURL}

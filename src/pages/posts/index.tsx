@@ -2,7 +2,6 @@ import { GetStaticProps, NextPage } from 'next';
 import { getAllTagsList, getSortedPostsData } from '@/lib/posts';
 import StdLayout from '@/components/stdlayout';
 import Head from 'next/head';
-import BlogMetaCard from '@/components/blogMetaCard';
 import SmallPostCard from '@/components/SmallPostCard';
 
 type BlogRollParams = {

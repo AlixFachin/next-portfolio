@@ -43,23 +43,27 @@ export default async function handler(
         const decodedToken = await getAuth(fbAdminApp).verifyIdToken(fbToken);
 
         if (process.env.ISR_UID === '') {
-            console.error('Incremental static regeneration not setup on the server!');
-            return res.status(500).send('Incremental static regeneration not setup on the server!');
+            console.error(
+                'Incremental static regeneration not setup on the server!'
+            );
+            return res
+                .status(500)
+                .send(
+                    'Incremental static regeneration not setup on the server!'
+                );
         }
-        console.log(`Found the user UID to be ${decodedToken.uid}`);
 
         if (decodedToken.uid === process.env.ISR_UID) {
-            console.log(`Success! Send the revalidate...`)
             // Re-validating static root pages
             await res.revalidate('/');
             await res.revalidate('/posts');
-            
+
             // revalidating the post which was modified (if indicated)
             if (req.query.postId) {
                 await res.revalidate(`/posts/${req.query.postId}`);
             }
 
-            // TODO: If there is a parameter for "pages", re-validating all the pages 
+            // TODO: If there is a parameter for "pages", re-validating all the pages
             //  not a lot of pages, so might as well revalidate them all in one go
             if (req.query.pages && req.query.pages === 'true') {
                 await res.revalidate('/404');
